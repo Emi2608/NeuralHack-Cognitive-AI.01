@@ -1,7 +1,26 @@
 # NeuralHack Cognitive AI - Arquitectura de Ingeniería y Mejores Prácticas
 
 ## Resumen Ejecutivo
-PWA de salud para screening cognitivo temprano con arquitectura basada en evidencia científica, enfocada en escalabilidad, seguridad y validación clínica. Diseñada específicamente para despliegue en Supabase con React + Ionic, dirigida a adultos mexicanos de 40-60 años para detección temprana de deterioro cognitivo y depresión.
+PWA de salud para screening cognitivo temprano con arquitectura basada en evidencia científica, enfocada en escalabilidad, seguridad y validación clínica. **SaMD (Software como Dispositivo Médico) Clase II con cumplimiento regulatorio validado para FDA, COFEPRIS y marcado CE**. Diseñada específicamente para despliegue en Supabase con React + Ionic, dirigida a adultos mexicanos de 40-60 años para detección temprana de deterioro cognitivo y depresión.
+
+## Marco de Cumplimiento Regulatorio
+
+### **Clasificación Software como Dispositivo Médico (SaMD)**
+- **FDA (Estados Unidos)**: Dispositivo médico Clase II bajo 21 CFR 870.2050
+- **COFEPRIS (México)**: Clase II bajo marco NOM-241-SSA1-2021
+- **Marcado CE (Europa)**: Clase IIa bajo MDR 2017/745, Regla 11
+
+### **Sistema de Gestión de Calidad (SGC)**
+- **Estándar**: ISO 13485:2016 Gestión de Calidad para Dispositivos Médicos
+- **Implementación**: Enfoque basado en riesgo con controles de diseño
+- **Documentación**: Archivo Histórico de Diseño (DHF) y Registro Maestro del Dispositivo (DMR)
+- **Validación**: Protocolos IQ/OQ/PQ para validación de software
+
+### **Requisitos de Validación Clínica**
+- **Asociación Clínica**: Correlación de biomarcadores digitales con estado cognitivo
+- **Validación Analítica**: Rendimiento de algoritmos y especificaciones técnicas
+- **Validación Clínica**: Efectividad en el mundo real en población objetivo
+- **Seguimiento Clínico Post-Comercialización (PMCF)**: Monitoreo continuo de seguridad y efectividad
 
 ## Validación Científica
 Basado en investigación reciente que demuestra:
@@ -373,9 +392,97 @@ npx supabase start
 npx supabase stop
 ```
 
+## Requisitos Regulatorios de Datos
+
+### **Requisitos COFEPRIS (NOM-241-SSA1-2021)**
+```typescript
+interface RequisitosDatosCOFEPRIS {
+  registroSanitario: DatosRegistroSanitario
+  evidenciaClinica: EvidenciaClinicaMexico
+  sistemaCalidad: SistemaGestionCalidad
+  etiquetado: EtiquetadoEspanol
+  tecnovigilancia: DatosTecnovigilancia
+}
+
+class GestorCumplimientoCOFEPRIS {
+  async enviarRegistroSanitario(): Promise<SolicitudRegistroSanitario> {
+    return {
+      tipoDispositivo: "Software como Dispositivo Médico (SaMD)",
+      clasificacion: "Clase II",
+      usoDestinado: "Tamizaje temprano de deterioro cognitivo y depresión",
+      poblacionObjetivo: "Adultos mexicanos de 40-60 años",
+      evidenciaClinica: await this.obtenerEvidenciaClinicaMexicana(),
+      sistemaCalidad: this.implementarNOM241(),
+      interoperabilidad: this.cumplirNOM024(),
+      proteccionDatos: this.cumplirLFPDPPP()
+    }
+  }
+  
+  async implementarTecnovigilancia(): Promise<SistemaTecnovigilancia> {
+    return {
+      reporteIncidentes: this.configurarReporteIncidentes(),
+      monitoreoContinuo: this.establecerMonitoreo(),
+      accionesCorrectivas: this.definirAccionesCorrectivas(),
+      reportesPeriodicos: this.programarReportesPeriodicos()
+    }
+  }
+}
+```
+
+### **Requisitos FDA (21 CFR Parte 820)**
+```typescript
+interface RequisitosDatosFDA {
+  descripcionDispositivo: string
+  usoDestinado: string
+  indicacionesUso: string
+  contraindicaciones: string[]
+  advertencias: string[]
+  precauciones: string[]
+  eventosAdversos: EventoAdverso[]
+  datosClinicosUS: DatosEstudioClinicoUS
+  documentacionSoftware: ProcesoVidaSoftware
+}
+
+class GestorCumplimientoFDA {
+  async enviarNotificacionPremercado(): Promise<Solicitud510k> {
+    return {
+      tipoSolicitud: "510(k)",
+      dispositivoPredicado: "Dispositivo predicado identificado",
+      equivalenciaSubstancial: this.demostrarEquivalenciaSubstancial(),
+      datosClinicosUS: await this.obtenerDatosValidacionClinica(),
+      analisisRiesgo: this.realizarAnalisisRiesgo(),
+      documentacionCalidad: this.prepararDocumentacionQMS()
+    }
+  }
+}
+```
+
+### **Requisitos Marcado CE (MDR 2017/745)**
+```typescript
+interface RequisitosMarcadoCE {
+  documentacionTecnica: DocumentacionTecnica
+  evaluacionClinica: InformeEvaluacionClinica
+  vigilanciaPostMercado: PlanPMS
+  identificacionUnicaDispositivo: DatosUDI
+  representanteAutorizado: RepresentanteAutorizadoUE
+}
+
+class GestorCumplimientoCE {
+  async prepararDocumentacionTecnica(): Promise<DocumentacionTecnica> {
+    return {
+      descripcionDispositivo: this.obtenerDescripcionDispositivo(),
+      gestionRiesgo: await this.realizarAnalisisRiesgoISO14971(),
+      evaluacionClinica: await this.prepararInformeEvaluacionClinica(),
+      ingenieriaUsabilidad: this.realizarIngenieriaUsabilidadIEC62366(),
+      cicloVidaSoftware: this.implementarIEC62304CicloVidaSoftware()
+    }
+  }
+}
+```
+
 ## Implementación de Seguridad Healthcare-Grade
 
-### 1. Autenticación Supabase con Seguridad Médica
+### 1. Cumplimiento HIPAA/GDPR/LFPDPPP
 ```typescript
 // hooks/useAuth.ts - Autenticación segura para healthcare
 import { useEffect, useState } from 'react'

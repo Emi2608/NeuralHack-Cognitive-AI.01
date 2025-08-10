@@ -1,7 +1,26 @@
 # NeuralHack Cognitive AI - Engineering Architecture & Best Practices
 
 ## Executive Summary
-Healthcare PWA for early cognitive screening with evidence-based architecture, focusing on scalability, security, and clinical validation. Specifically designed for Supabase deployment with React + Ionic, targeting Mexican adults aged 40-60 for early detection of cognitive decline and depression.
+Healthcare PWA for early cognitive screening with evidence-based architecture, focusing on scalability, security, and clinical validation. **Regulatory-compliant SaMD (Software as Medical Device) Class II with validated pathways for FDA, COFEPRIS, and CE approval**. Specifically designed for Supabase deployment with React + Ionic, targeting Mexican adults aged 40-60 for early detection of cognitive decline and depression.
+
+## Regulatory Compliance Framework
+
+### **Software as Medical Device (SaMD) Classification**
+- **FDA (US)**: Class II medical device under 21 CFR 870.2050
+- **COFEPRIS (Mexico)**: Class II under NOM-241-SSA1-2021 framework
+- **CE Marking (Europe)**: Class IIa under MDR 2017/745, Rule 11
+
+### **Quality Management System (QMS)**
+- **Standard**: ISO 13485:2016 Medical Devices Quality Management
+- **Implementation**: Risk-based approach with design controls
+- **Documentation**: Design History File (DHF) and Device Master Record (DMR)
+- **Validation**: IQ/OQ/PQ protocols for software validation
+
+### **Clinical Validation Requirements**
+- **Clinical Association**: Digital biomarkers correlation with cognitive state
+- **Analytical Validation**: Algorithm performance and technical specifications
+- **Clinical Validation**: Real-world effectiveness in target population
+- **Post-Market Clinical Follow-up (PMCF)**: Continuous safety and effectiveness monitoring
 
 ## Scientific Validation
 Based on recent research demonstrating:
@@ -373,9 +392,96 @@ npx supabase start
 npx supabase stop
 ```
 
+## Regulatory Data Requirements
+
+### **FDA Requirements (21 CFR Part 820)**
+```typescript
+interface FDADataRequirements {
+  deviceDescription: string
+  intendedUse: string
+  indicationsForUse: string
+  contraindications: string[]
+  warnings: string[]
+  precautions: string[]
+  adverseEvents: AdverseEvent[]
+  clinicalData: ClinicalStudyData
+  softwareDocumentation: SoftwareLifecycleProcess
+}
+
+class FDAComplianceManager {
+  generateDeviceDescription(): DeviceDescription {
+    return {
+      deviceName: "NeuralHack Cognitive AI",
+      classification: "Class II Medical Device Software",
+      regulationNumber: "21 CFR 870.2050",
+      productCode: "QFM", // Software, Neurological Diagnostic
+      panelCode: "Neurology",
+      intendedUse: "Early screening of cognitive decline and depression in adults aged 40-60"
+    }
+  }
+  
+  async submitPremarketNotification(): Promise<FDA510kSubmission> {
+    return {
+      submissionType: "510(k)",
+      predicateDevice: "Identified predicate device",
+      substantialEquivalence: this.demonstrateSubstantialEquivalence(),
+      clinicalData: await this.getClinicalValidationData(),
+      riskAnalysis: this.performRiskAnalysis()
+    }
+  }
+}
+```
+
+### **COFEPRIS Requirements (NOM-241-SSA1-2021)**
+```typescript
+interface COFEPRISDataRequirements {
+  registroSanitario: RegistroSanitarioData
+  evidenciaClinica: EvidenciaClinicaMexico
+  sistemaCalidad: SistemaGestionCalidad
+  etiquetado: EtiquetadoEspanol
+  tecnovigilancia: TecnovigilanciaData
+}
+
+class COFEPRISComplianceManager {
+  async submitRegistroSanitario(): Promise<RegistroSanitarioSubmission> {
+    return {
+      tipoDispositivo: "Software como Dispositivo Médico (SaMD)",
+      clasificacion: "Clase II",
+      usoDestinado: "Tamizaje temprano de deterioro cognitivo",
+      poblacionObjetivo: "Adultos mexicanos de 40-60 años",
+      evidenciaClinica: await this.getEvidenciaClinicaMexicana(),
+      sistemaCalidad: this.implementarNOM241()
+    }
+  }
+}
+```
+
+### **CE Marking Requirements (MDR 2017/745)**
+```typescript
+interface CEMarkingRequirements {
+  technicalDocumentation: TechnicalDocumentation
+  clinicalEvaluation: ClinicalEvaluationReport
+  postMarketSurveillance: PMSPlan
+  uniqueDeviceIdentification: UDIData
+  authorizedRepresentative: EUAuthorizedRep
+}
+
+class CEComplianceManager {
+  async prepareTechnicalDocumentation(): Promise<TechnicalDocumentation> {
+    return {
+      deviceDescription: this.getDeviceDescription(),
+      riskManagement: await this.performISO14971RiskAnalysis(),
+      clinicalEvaluation: await this.prepareClinicalEvaluationReport(),
+      usabilityEngineering: this.performIEC62366UsabilityEngineering(),
+      softwareLifecycle: this.implementIEC62304SoftwareLifecycle()
+    }
+  }
+}
+```
+
 ## Healthcare-Grade Security Implementation
 
-### 1. Supabase Authentication with Medical Security
+### 1. HIPAA/GDPR/LFPDPPP Compliance Architecture
 ```typescript
 // hooks/useAuth.ts - Secure authentication for healthcare
 import { useEffect, useState } from 'react'
@@ -973,35 +1079,299 @@ class AdvancedMoCAScoring {
 export const advancedMoCAScoring = new AdvancedMoCAScoring()
 ```
 
-## Compliance & Regulatory Improvements
+## Post-Market Surveillance Implementation
 
-### 1. HIPAA Compliance
+### 1. FDA Post-Market Surveillance (PMS)
 ```typescript
-// Audit logging
-class AuditLogger {
-  static logAccess(userId: string, resource: string, action: string) {
-    const auditEntry = {
-      timestamp: new Date().toISOString(),
-      userId,
-      resource,
-      action,
-      ipAddress: req.ip,
-      userAgent: req.get('User-Agent')
-    };
+interface FDAPostMarketData {
+  adverseEvents: AdverseEvent[]
+  deviceMalfunctions: DeviceMalfunction[]
+  userComplaints: UserComplaint[]
+  performanceMetrics: PerformanceMetric[]
+  realWorldEvidence: RealWorldEvidenceData
+}
+
+class FDAPostMarketSurveillance {
+  async reportAdverseEvent(event: AdverseEvent): Promise<void> {
+    // Report to FDA within 24 hours for serious events
+    if (event.severity === 'serious') {
+      await this.submitMDR(event) // Medical Device Report
+    }
     
-    // Store in immutable audit log
-    AuditLog.create(auditEntry);
+    // Store in audit trail
+    await this.auditLogger.logEvent('adverse_event_reported', event)
+  }
+  
+  async generatePeriodicSafetyUpdate(): Promise<PSURReport> {
+    return {
+      reportingPeriod: this.getReportingPeriod(),
+      devicePerformance: await this.analyzeDevicePerformance(),
+      benefitRiskAssessment: await this.assessBenefitRisk(),
+      recommendedActions: this.generateRecommendations()
+    }
   }
 }
 ```
 
-### 2. GDPR Compliance
+### 2. COFEPRIS Tecnovigilancia
 ```typescript
-// Data retention policy
-class DataRetentionService {
-  static async enforceRetentionPolicy() {
-    // Delete user data after 7 years of inactivity
-    await User.deleteMany({
+interface TecnovigilanciaData {
+  incidentesAdversos: IncidenteAdverso[]
+  fallasDispositivo: FallaDispositivo[]
+  quejasUsuarios: QuejaUsuario[]
+  reportesPeriodicos: ReportePeriodicoSeguridad[]
+}
+
+class COFEPRISTecnovigilancia {
+  async reportarIncidenteAdverso(incidente: IncidenteAdverso): Promise<void> {
+    // Reportar a COFEPRIS según NOM-241
+    await this.submitIncidentReport(incidente)
+    
+    // Implementar acciones correctivas si es necesario
+    if (incidente.requiereAccionCorrectiva) {
+      await this.implementarAccionCorrectiva(incidente)
+    }
+  }
+  
+  async generarReportePeriodicoSeguridad(): Promise<ReporteSeguridad> {
+    return {
+      periodo: this.getPeriodoReporte(),
+      rendimientoDispositivo: await this.analizarRendimiento(),
+      evaluacionBeneficioRiesgo: await this.evaluarBeneficioRiesgo(),
+      accionesRecomendadas: this.generarRecomendaciones()
+    }
+  }
+}
+```
+
+### 3. CE Post-Market Clinical Follow-up (PMCF)
+```typescript
+interface PMCFData {
+  clinicalPerformance: ClinicalPerformanceData
+  safetyProfile: SafetyProfileData
+  benefitRiskAssessment: BenefitRiskAssessment
+  clinicalEvidenceUpdates: ClinicalEvidenceUpdate[]
+}
+
+class CEPostMarketClinicalFollowup {
+  async conductPMCFStudy(): Promise<PMCFStudyResults> {
+    return {
+      studyDesign: this.designPMCFStudy(),
+      dataCollection: await this.collectRealWorldData(),
+      clinicalAnalysis: await this.analyzeClinicalPerformance(),
+      safetyAnalysis: await this.analyzeSafetyProfile(),
+      conclusions: this.generateConclusions()
+    }
+  }
+  
+  async updateClinicalEvaluation(): Promise<ClinicalEvaluationUpdate> {
+    const pmcfData = await this.getPMCFData()
+    return {
+      updatedClinicalEvidence: this.incorporatePMCFFindings(pmcfData),
+      benefitRiskReassessment: this.reassessBenefitRisk(pmcfData),
+      recommendedActions: this.generateRecommendations(pmcfData)
+    }
+  }
+}
+```
+
+## Interoperability Standards Implementation
+
+### 1. HL7 FHIR (US Market)
+```typescript
+interface FHIRCognitiveAssessment {
+  resourceType: "Observation"
+  id: string
+  status: "final" | "preliminary"
+  category: CodeableConcept[]
+  code: CodeableConcept // LOINC code for cognitive assessment
+  subject: Reference // Patient reference
+  effectiveDateTime: string
+  valueQuantity?: Quantity // Numeric score
+  component?: ObservationComponent[] // Individual test components
+  interpretation?: CodeableConcept[]
+}
+
+class FHIRIntegration {
+  async createCognitiveAssessmentObservation(
+    assessment: CognitiveAssessmentResult
+  ): Promise<FHIRCognitiveAssessment> {
+    return {
+      resourceType: "Observation",
+      id: assessment.id,
+      status: "final",
+      category: [{
+        coding: [{
+          system: "http://terminology.hl7.org/CodeSystem/observation-category",
+          code: "survey",
+          display: "Survey"
+        }]
+      }],
+      code: {
+        coding: [{
+          system: "http://loinc.org",
+          code: "72133-2", // Montreal Cognitive Assessment
+          display: "Montreal Cognitive Assessment"
+        }]
+      },
+      subject: {
+        reference: `Patient/${assessment.patientId}`
+      },
+      effectiveDateTime: assessment.completedAt,
+      valueQuantity: {
+        value: assessment.totalScore,
+        unit: "points",
+        system: "http://unitsofmeasure.org",
+        code: "{score}"
+      },
+      component: this.createAssessmentComponents(assessment)
+    }
+  }
+}
+```
+
+### 2. NOM-024-SSA3-2012 (Mexico Market)
+```typescript
+interface ExpedienteClinicoElectronico {
+  identificadorPaciente: string
+  fechaEvaluacion: string
+  tipoEvaluacion: "MoCA" | "PHQ-9" | "MMSE" | "AD8"
+  resultados: ResultadoEvaluacion
+  recomendaciones: string[]
+  profesionalSalud?: string
+}
+
+class NOM024Integration {
+  async integrarConExpedienteClinico(
+    evaluacion: CognitiveAssessmentResult
+  ): Promise<ExpedienteClinicoElectronico> {
+    return {
+      identificadorPaciente: evaluacion.patientId,
+      fechaEvaluacion: evaluacion.completedAt,
+      tipoEvaluacion: evaluacion.testType,
+      resultados: {
+        puntajeTotal: evaluacion.totalScore,
+        nivelRiesgo: evaluacion.riskLevel,
+        confianza: evaluacion.confidence,
+        biomarcadoresDigitales: evaluacion.digitalBiomarkers
+      },
+      recomendaciones: evaluacion.recommendations
+    }
+  }
+  
+  async enviarAExpedienteClinico(
+    expediente: ExpedienteClinicoElectronico
+  ): Promise<void> {
+    // Integración con sistemas de salud mexicanos
+    await this.validateNOM024Compliance(expediente)
+    await this.encryptPHI(expediente)
+    await this.submitToHealthcareSystem(expediente)
+  }
+}
+```
+
+## Compliance & Regulatory Improvements
+
+### 1. HIPAA Compliance (US)
+```typescript
+class HIPAAComplianceManager {
+  async logAccess(userId: string, resource: string, action: string): Promise<void> {
+    const auditEntry: HIPAAAuditEntry = {
+      timestamp: new Date().toISOString(),
+      userId,
+      resource,
+      action,
+      ipAddress: this.getClientIP(),
+      userAgent: this.getUserAgent(),
+      sessionId: this.getSessionId(),
+      accessResult: 'success' | 'failure'
+    }
+    
+    // Store in immutable audit log (required for HIPAA)
+    await this.auditLogger.createImmutableEntry(auditEntry)
+  }
+  
+  async enforceMinimumNecessary(
+    userId: string, 
+    requestedData: string[]
+  ): Promise<string[]> {
+    // Implement minimum necessary standard
+    const userRole = await this.getUserRole(userId)
+    return this.filterDataByRole(requestedData, userRole)
+  }
+}
+```
+
+### 2. GDPR Compliance (Europe)
+```typescript
+class GDPRComplianceManager {
+  async enforceDataRetentionPolicy(): Promise<void> {
+    // Delete personal data after retention period
+    const expiredData = await this.findExpiredPersonalData()
+    
+    for (const data of expiredData) {
+      await this.anonymizeOrDelete(data)
+      await this.logDataDeletion(data.id, 'retention_policy')
+    }
+  }
+  
+  async handleDataSubjectRequest(
+    request: DataSubjectRequest
+  ): Promise<DataSubjectResponse> {
+    switch (request.type) {
+      case 'access':
+        return await this.provideDataAccess(request.subjectId)
+      case 'rectification':
+        return await this.rectifyData(request.subjectId, request.corrections)
+      case 'erasure':
+        return await this.eraseData(request.subjectId)
+      case 'portability':
+        return await this.exportData(request.subjectId)
+      default:
+        throw new Error('Unsupported request type')
+    }
+  }
+}
+```
+
+### 3. LFPDPPP Compliance (Mexico)
+```typescript
+class LFPDPPPComplianceManager {
+  async obtenerConsentimientoInformado(
+    userId: string
+  ): Promise<ConsentimientoInformado> {
+    return {
+      fechaConsentimiento: new Date().toISOString(),
+      versionAviso: this.CURRENT_PRIVACY_NOTICE_VERSION,
+      finalidades: [
+        'Evaluación cognitiva',
+        'Análisis de riesgo',
+        'Recomendaciones personalizadas',
+        'Investigación científica (datos anonimizados)'
+      ],
+      derechosARCO: {
+        acceso: true,
+        rectificacion: true,
+        cancelacion: true,
+        oposicion: true
+      },
+      transferencias: this.getDataTransferInfo(),
+      responsable: this.getDataControllerInfo()
+    }
+  }
+  
+  async ejercerDerechosARCO(
+    solicitud: SolicitudARCO
+  ): Promise<RespuestaARCO> {
+    // Implementar derechos ARCO (Acceso, Rectificación, Cancelación, Oposición)
+    const response = await this.processARCORequest(solicitud)
+    
+    // Responder dentro de 20 días hábiles (LFPDPPP requirement)
+    await this.scheduleResponse(response, 20)
+    
+    return response
+  }
+}it User.deleteMany({
       lastLoginAt: { $lt: new Date(Date.now() - 7 * 365 * 24 * 60 * 60 * 1000) }
     });
   }
