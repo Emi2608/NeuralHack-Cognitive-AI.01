@@ -65,4 +65,24 @@ graph TD
     C -->|Anonymized Data| F[Future ML Integration: Vectors/Logistic Regression]
     B -->|Visualizations| G[Chart.js: Dashboards/Charts]
     B -->|Accessibility| H[Web Speech API: Voice Guidance]
-    B -->|Drawing Tasks| I[HTML Canvas: Interactive Inputs] 
+    B -->|Drawing Tasks| I[HTML Canvas: Interactive Inputs]
+```
+## Sitemap Diagram
+
+```mermaid
+graph TD
+    Home --> Login/Register
+    Login/Register --> Dashboard
+    Dashboard --> Tests
+    Tests --> MoCA_Test
+    Tests --> PHQ9_Test
+    Tests --> MMSE_Test
+    Tests --> AD8_Test
+    Tests --> Parkinson_Test
+    Dashboard --> Data_Portal
+    Data_Portal --> Historical_Results
+    Data_Portal --> Progression_Charts
+    Dashboard --> Educational_Content
+    Dashboard --> Recommendations
+    Dashboard --> Settings[Settings: Language, Privacy, Export Data]
+```
