@@ -1,0 +1,160 @@
+.data-deletion-panel {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.warning-card {
+  border-left: 4px solid var(--ion-color-warning);
+  background: var(--ion-color-warning-tint);
+}
+
+.warning-card ion-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ion-color-warning-shade);
+}
+
+.warning-card ion-card-title ion-icon {
+  font-size: 20px;
+}
+
+.info-card {
+  background: var(--ion-color-light);
+  border: 1px solid var(--ion-color-medium-tint);
+}
+
+.info-card h4 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.info-card ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.info-card li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.critical-icon {
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.deletion-actions {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.deletion-actions ion-button {
+  --border-radius: 8px;
+}
+
+/* Checkbox styling */
+ion-item ion-checkbox {
+  margin-right: 16px;
+}
+
+/* Textarea styling */
+ion-textarea {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .data-deletion-panel * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .warning-card {
+    border-left-width: 6px;
+    border: 2px solid var(--ion-color-warning);
+  }
+  
+  .info-card {
+    border-width: 2px;
+  }
+  
+  .critical-icon {
+    filter: contrast(2);
+  }
+}
+
+/* Large text support */
+.accessibility-large-text .info-card li {
+  font-size: 16px;
+}
+
+.accessibility-extra-large-text .info-card li {
+  font-size: 18px;
+}
+
+/* Focus indicators */
+ion-button:focus-visible {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+ion-checkbox:focus-visible {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+ion-textarea:focus-within {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .data-deletion-panel {
+    margin: 0 8px;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .warning-card {
+    background: var(--ion-color-warning-shade);
+  }
+  
+  .info-card {
+    background: var(--ion-color-dark-tint);
+    border-color: var(--ion-color-medium);
+  }
+  
+  .info-card h4,
+  .info-card li {
+    color: var(--ion-color-light);
+  }
+}
+
+/* Animation for deletion process */
+.deleting {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Warning text styling */
+.warning-card p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.warning-card strong {
+  font-weight: 600;
+}

@@ -1,0 +1,132 @@
+.export-panel {
+  margin: 16px 0;
+}
+
+.export-panel .title-icon {
+  margin-right: 8px;
+  color: var(--ion-color-primary);
+}
+
+.export-description {
+  color: var(--ion-color-medium);
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+
+.export-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-warning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ion-color-warning);
+  font-size: 14px;
+  margin: 0;
+  padding: 8px;
+  background: var(--ion-color-warning-tint);
+  border-radius: 8px;
+  opacity: 0.8;
+}
+
+.export-modal-actions {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.export-modal-actions ion-button {
+  margin: 0;
+}
+
+/* Format selection styling */
+ion-select {
+  max-width: none;
+}
+
+/* Date range styling */
+ion-datetime {
+  max-width: 200px;
+}
+
+/* Security section styling */
+ion-item ion-toggle {
+  margin-right: 16px;
+}
+
+/* Progress bar in button */
+ion-button ion-progress-bar {
+  margin-right: 8px;
+  width: 20px;
+  height: 4px;
+}
+
+/* List headers */
+ion-list-header {
+  font-weight: 600;
+  color: var(--ion-color-primary);
+}
+
+/* Checkbox items */
+ion-item ion-checkbox {
+  margin-right: 16px;
+}
+
+ion-item ion-label h3 {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+ion-item ion-label p {
+  color: var(--ion-color-medium);
+  font-size: 13px;
+}
+
+/* Modal content spacing */
+ion-content ion-list {
+  padding-bottom: 80px; /* Space for action buttons */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .export-modal-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--ion-background-color);
+    border-top: 1px solid var(--ion-color-light);
+    z-index: 1000;
+  }
+  
+  ion-content ion-list {
+    padding-bottom: 120px; /* More space for fixed buttons */
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .export-panel {
+    border: 2px solid var(--ion-color-primary);
+  }
+  
+  .auth-warning {
+    border: 1px solid var(--ion-color-warning);
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .export-description {
+    color: var(--ion-color-medium-shade);
+  }
+  
+  .auth-warning {
+    background: rgba(var(--ion-color-warning-rgb), 0.2);
+  }
+}

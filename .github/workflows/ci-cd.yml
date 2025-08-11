@@ -1,0 +1,195 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  NODE_VERSION: '18'
+  SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+  SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+
+jobs:
+  # Linting and Type Checking
+  lint-and-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: neuralhack-cognitive-ai/package-lock.json
+
+      - name: Install dependencies
+        working-directory: neuralhack-cognitive-ai
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: neuralhack-cognitive-ai
+        run: npm run lint
+
+      - name: Run TypeScript type checking
+        working-directory: neuralhack-cognitive-ai
+        run: npm run type-check
+
+  # Security Analysis
+  security-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run npm audit
+        working-directory: neuralhack-cognitive-ai
+        run: npm audit --audit-level=high
+
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+  # Unit and Integration Tests
+  test:
+    runs-on: ubuntu-latest
+    needs: [lint-and-typecheck]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: neuralhack-cognitive-ai/package-lock.json
+
+      - name: Install dependencies
+        working-directory: neuralhack-cognitive-ai
+        run: npm ci
+
+      - name: Run unit tests with coverage
+        working-directory: neuralhack-cognitive-ai
+        run: npm run test:coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: neuralhack-cognitive-ai/coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+
+  # End-to-End Tests
+  e2e-tests:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: neuralhack-cognitive-ai/package-lock.json
+
+      - name: Install dependencies
+        working-directory: neuralhack-cognitive-ai
+        run: npm ci
+
+      - name: Install Playwright browsers
+        working-directory: neuralhack-cognitive-ai
+        run: npx playwright install --with-deps
+
+      - name: Build application
+        working-directory: neuralhack-cognitive-ai
+        run: npm run build
+
+      - name: Run E2E tests
+        working-directory: neuralhack-cognitive-ai
+        run: npm run test:e2e
+
+      - name: Upload E2E test results
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: neuralhack-cognitive-ai/playwright-report/
+          retention-days: 30
+
+  # Build and Deploy
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    needs: [security-analysis, test, e2e-tests]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: neuralhack-cognitive-ai/package-lock.json
+
+      - name: Install dependencies
+        working-directory: neuralhack-cognitive-ai
+        run: npm ci
+
+      - name: Build application
+        working-directory: neuralhack-cognitive-ai
+        run: npm run build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+
+      - name: Run Lighthouse CI
+        working-directory: neuralhack-cognitive-ai
+        run: |
+          npm install -g @lhci/cli@0.12.x
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Deploy to Supabase
+        working-directory: neuralhack-cognitive-ai
+        run: |
+          npm install -g supabase
+          supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_REF }}
+          supabase db push
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: neuralhack-cognitive-ai
+          vercel-args: '--prod'
+
+  # Notify deployment status
+  notify:
+    runs-on: ubuntu-latest
+    needs: [build-and-deploy]
+    if: always()
+    steps:
+      - name: Notify deployment status
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          channel: '#deployments'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}

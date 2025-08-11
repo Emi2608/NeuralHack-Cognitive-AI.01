@@ -1,0 +1,9 @@
+{
+  "name": "neuralhack-cognitive-ai",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "root": ".",
+  "sourceRoot": "src"
+}

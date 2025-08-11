@@ -1,0 +1,182 @@
+.monitoring-dashboard {
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  gap: 16px;
+}
+
+.system-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.status-badge {
+  font-size: 1.2rem;
+  padding: 12px 24px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metric-card {
+  height: 120px;
+  margin: 8px 0;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  justify-content: center;
+}
+
+.metric-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: var(--ion-color-primary);
+}
+
+.metric-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--ion-color-primary);
+  margin-bottom: 4px;
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: var(--ion-color-medium);
+  text-align: center;
+}
+
+.error-message {
+  color: var(--ion-color-danger);
+  font-style: italic;
+}
+
+.chart-container {
+  height: 300px;
+  position: relative;
+}
+
+.stat {
+  text-align: center;
+  padding: 16px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--ion-color-primary);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--ion-color-medium);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .monitoring-dashboard {
+    padding: 8px;
+  }
+  
+  .metric-card {
+    height: 100px;
+  }
+  
+  .metric-value {
+    font-size: 1.4rem;
+  }
+  
+  .metric-label {
+    font-size: 0.8rem;
+  }
+  
+  .chart-container {
+    height: 250px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .metric-icon {
+    color: var(--ion-color-primary-tint);
+  }
+  
+  .metric-value {
+    color: var(--ion-color-primary-tint);
+  }
+  
+  .stat-value {
+    color: var(--ion-color-primary-tint);
+  }
+}
+
+/* Accessibility */
+.monitoring-dashboard ion-card {
+  transition: transform 0.2s ease;
+}
+
+.monitoring-dashboard ion-card:hover {
+  transform: translateY(-2px);
+}
+
+.monitoring-dashboard ion-card:focus-within {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+/* Alert styling */
+.monitoring-dashboard ion-item {
+  --border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.monitoring-dashboard ion-badge {
+  font-weight: 600;
+}
+
+/* Status indicators */
+.status-healthy {
+  color: var(--ion-color-success);
+}
+
+.status-degraded {
+  color: var(--ion-color-warning);
+}
+
+.status-unhealthy {
+  color: var(--ion-color-danger);
+}
+
+/* Animation for loading states */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.loading-container ion-spinner {
+  animation: pulse 2s infinite;
+}

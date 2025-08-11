@@ -1,0 +1,106 @@
+.consent-manager {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.consent-item {
+  width: 100%;
+}
+
+.consent-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.consent-header ion-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.consent-header ion-label {
+  flex: 1;
+}
+
+.consent-header ion-toggle {
+  flex-shrink: 0;
+}
+
+.consent-description {
+  margin-left: 32px;
+  margin-bottom: 12px;
+}
+
+.consent-description p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.consent-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.consent-actions ion-button {
+  --border-radius: 8px;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .consent-manager * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .consent-item {
+    border: 1px solid var(--ion-color-dark);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+  
+  .consent-header ion-icon {
+    filter: contrast(2);
+  }
+}
+
+/* Large text support */
+.accessibility-large-text .consent-description p {
+  font-size: 16px;
+}
+
+.accessibility-extra-large-text .consent-description p {
+  font-size: 18px;
+}
+
+/* Focus indicators */
+.consent-header ion-toggle:focus-visible {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .consent-actions {
+    flex-direction: column;
+  }
+  
+  .consent-actions ion-button {
+    width: 100%;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .consent-description {
+    color: var(--ion-color-light-shade);
+  }
+}

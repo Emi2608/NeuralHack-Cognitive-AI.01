@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generar Iconos PWA</title>
+</head>
+<body>
+    <canvas id="canvas" width="512" height="512" style="border: 1px solid #ccc;"></canvas>
+    <br><br>
+    <button onclick="generateIcons()">Generar Iconos</button>
+    <div id="downloads"></div>
+
+    <script>
+        function generateIcons() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Limpiar canvas
+            ctx.clearRect(0, 0, 512, 512);
+            
+            // Fondo azul
+            ctx.fillStyle = '#3880ff';
+            ctx.fillRect(0, 0, 512, 512);
+            
+            // Círculo blanco
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(256, 256, 200, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Texto "NH"
+            ctx.fillStyle = '#3880ff';
+            ctx.font = 'bold 120px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('NH', 256, 256);
+            
+            // Generar diferentes tamaños
+            const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+            const downloads = document.getElementById('downloads');
+            downloads.innerHTML = '';
+            
+            sizes.forEach(size => {
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = size;
+                tempCanvas.height = size;
+                const tempCtx = tempCanvas.getContext('2d');
+                
+                tempCtx.drawImage(canvas, 0, 0, size, size);
+                
+                const link = document.createElement('a');
+                link.download = `icon-${size}x${size}.png`;
+                link.href = tempCanvas.toDataURL();
+                link.textContent = `Descargar ${size}x${size}`;
+                link.style.display = 'block';
+                link.style.margin = '5px 0';
+                
+                downloads.appendChild(link);
+            });
+        }
+        
+        // Generar iconos automáticamente
+        window.onload = generateIcons;
+    </script>
+</body>
+</html>

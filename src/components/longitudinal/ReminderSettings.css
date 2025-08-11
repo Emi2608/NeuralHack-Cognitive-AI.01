@@ -1,0 +1,312 @@
+.reminder-settings-card {
+  margin: 0 0 16px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reminder-settings-card ion-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1em;
+  color: var(--ion-color-primary);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  color: var(--ion-color-medium);
+}
+
+.reminder-description {
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: var(--ion-color-light);
+  border-radius: 8px;
+}
+
+.reminder-description p {
+  margin: 0;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.reminders-list {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.reminder-item {
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 16px;
+  --border-style: none;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background: var(--ion-color-light);
+  border: 1px solid var(--ion-color-light-shade);
+}
+
+.reminder-item:last-child {
+  margin-bottom: 0;
+}
+
+.reminder-content {
+  width: 100%;
+  padding: 16px;
+}
+
+.reminder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.test-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.test-name {
+  font-size: 1em;
+  font-weight: 600;
+  margin: 0;
+  color: var(--ion-color-dark);
+}
+
+.reminder-toggle {
+  --handle-width: 20px;
+  --handle-height: 20px;
+  --track-width: 40px;
+  --track-height: 24px;
+}
+
+.delete-button {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  margin: -8px -8px 0 0;
+}
+
+.reminder-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ion-color-light-shade);
+}
+
+.frequency-setting {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.frequency-setting ion-label {
+  font-weight: 600;
+  color: var(--ion-color-dark);
+  min-width: 80px;
+}
+
+.frequency-select {
+  flex: 1;
+  max-width: 200px;
+}
+
+.next-reminder {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85em;
+  color: var(--ion-color-medium);
+}
+
+.next-reminder ion-icon {
+  font-size: 1.1em;
+  color: var(--ion-color-primary);
+}
+
+.custom-message {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-message ion-label {
+  font-weight: 600;
+  color: var(--ion-color-dark);
+  font-size: 0.9em;
+}
+
+.message-textarea {
+  --background: white;
+  --border-radius: 6px;
+  --border-color: var(--ion-color-light-shade);
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  font-size: 0.85em;
+}
+
+.add-reminder-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ion-color-light-shade);
+}
+
+.add-reminder-button {
+  --border-radius: 8px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+}
+
+.no-reminders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ion-color-medium);
+}
+
+.no-reminders ion-icon {
+  margin-bottom: 16px;
+  color: var(--ion-color-medium-shade);
+}
+
+.no-reminders h3 {
+  margin: 16px 0 8px 0;
+  color: var(--ion-color-dark);
+}
+
+.no-reminders p {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .reminder-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .test-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .delete-button {
+    align-self: flex-end;
+    margin: 0;
+  }
+  
+  .frequency-setting {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .frequency-setting ion-label {
+    min-width: auto;
+  }
+  
+  .frequency-select {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .next-reminder {
+    flex-wrap: wrap;
+  }
+}
+
+/* High contrast mode */
+.accessibility-high-contrast .reminder-settings-card {
+  border: 2px solid var(--ion-color-light);
+  background: var(--ion-color-dark);
+}
+
+.accessibility-high-contrast .reminder-description,
+.accessibility-high-contrast .reminder-item {
+  background: var(--ion-color-dark-shade);
+  border-color: var(--ion-color-medium);
+}
+
+.accessibility-high-contrast .test-name {
+  color: var(--ion-color-light);
+}
+
+.accessibility-high-contrast .frequency-setting ion-label,
+.accessibility-high-contrast .custom-message ion-label {
+  color: var(--ion-color-light);
+}
+
+.accessibility-high-contrast .message-textarea {
+  --background: var(--ion-color-dark-tint);
+  --color: var(--ion-color-light);
+  --border-color: var(--ion-color-medium);
+}
+
+.accessibility-high-contrast .no-reminders h3 {
+  color: var(--ion-color-light);
+}
+
+/* Large font support */
+.accessibility-font-large .test-name {
+  font-size: 1.2em;
+}
+
+.accessibility-font-large .frequency-setting ion-label,
+.accessibility-font-large .custom-message ion-label {
+  font-size: 1.1em;
+}
+
+.accessibility-font-large .next-reminder {
+  font-size: 1em;
+}
+
+.accessibility-font-large .message-textarea {
+  font-size: 1em;
+}
+
+.accessibility-font-extra-large .test-name {
+  font-size: 1.4em;
+}
+
+.accessibility-font-extra-large .frequency-setting ion-label,
+.accessibility-font-extra-large .custom-message ion-label {
+  font-size: 1.3em;
+}
+
+.accessibility-font-extra-large .next-reminder {
+  font-size: 1.2em;
+}
+
+.accessibility-font-extra-large .message-textarea {
+  font-size: 1.2em;
+}
+
+/* Touch target improvements */
+.accessibility-touch-large .reminder-toggle {
+  --handle-width: 24px;
+  --handle-height: 24px;
+  --track-width: 48px;
+  --track-height: 28px;
+}
+
+.accessibility-touch-large .delete-button {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+}

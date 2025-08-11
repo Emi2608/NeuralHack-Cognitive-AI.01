@@ -1,0 +1,228 @@
+.mmse-assessment {
+  --background: #f8f9fa;
+}
+
+.progress-container {
+  padding: 16px;
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.section-progress {
+  font-weight: 600;
+  color: var(--ion-color-primary);
+}
+
+.time-remaining {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+}
+
+.section-info-card {
+  margin: 16px;
+  margin-bottom: 8px;
+}
+
+.section-info-card ion-card-title {
+  color: var(--ion-color-primary);
+  font-size: 1.2rem;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  gap: 12px;
+  background: white;
+  border-top: 1px solid #e0e0e0;
+  position: sticky;
+  bottom: 0;
+}
+
+.navigation-buttons ion-button {
+  flex: 1;
+  max-width: 120px;
+}
+
+.navigation-buttons ion-button:nth-child(2) {
+  flex: 0;
+  max-width: 100px;
+}
+
+.completion-message {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.completion-message ion-icon {
+  margin-bottom: 20px;
+}
+
+.completion-message h2 {
+  color: var(--ion-color-success);
+  margin-bottom: 16px;
+}
+
+.completion-message p {
+  color: var(--ion-color-medium);
+  font-size: 1.1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .progress-info {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  
+  .navigation-buttons {
+    flex-direction: column;
+  }
+  
+  .navigation-buttons ion-button {
+    max-width: none;
+  }
+}
+
+/* MMSE specific styling */
+.mmse-orientation-section {
+  background: #e3f2fd;
+}
+
+.mmse-memory-section {
+  background: #f3e5f5;
+}
+
+.mmse-attention-section {
+  background: #e8f5e8;
+}
+
+.mmse-language-section {
+  background: #fff3e0;
+}
+
+/* Question type specific styles */
+.mmse-drawing-task {
+  min-height: 300px;
+}
+
+.mmse-memory-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.mmse-memory-word {
+  background: var(--ion-color-primary-tint);
+  color: var(--ion-color-primary-contrast);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.mmse-instruction-task {
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.mmse-instruction-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.mmse-instruction-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.mmse-instruction-step.completed {
+  background: #e8f5e8;
+  border-color: var(--ion-color-success);
+}
+
+.mmse-step-number {
+  background: var(--ion-color-primary);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.mmse-step-number.completed {
+  background: var(--ion-color-success);
+}
+
+.mmse-step-text {
+  flex: 1;
+}
+
+/* Serial 7s specific styling */
+.mmse-serial-7s {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mmse-serial-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mmse-serial-sequence {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.mmse-serial-number {
+  background: var(--ion-color-light);
+  border: 2px solid var(--ion-color-medium);
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 60px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.mmse-serial-number.correct {
+  background: var(--ion-color-success-tint);
+  border-color: var(--ion-color-success);
+  color: var(--ion-color-success-shade);
+}
+
+.mmse-serial-number.incorrect {
+  background: var(--ion-color-danger-tint);
+  border-color: var(--ion-color-danger);
+  color: var(--ion-color-danger-shade);
+}

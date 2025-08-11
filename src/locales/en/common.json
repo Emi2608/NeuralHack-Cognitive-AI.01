@@ -1,0 +1,62 @@
+{
+  "app": {
+    "name": "NeuralHack Cognitive AI",
+    "tagline": "Early detection of neurodegenerative diseases"
+  },
+  "navigation": {
+    "home": "Home",
+    "assessments": "Assessments",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "education": "Education"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "finish": "Finish",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "consent": "Consent",
+    "agreeToTerms": "I agree to the terms and conditions"
+  },
+  "assessments": {
+    "title": "Cognitive Assessments",
+    "selectTest": "Select an assessment",
+    "moca": "MoCA - Montreal Cognitive Assessment",
+    "phq9": "PHQ-9 - Patient Health Questionnaire",
+    "mmse": "MMSE - Mini-Mental State Examination",
+    "ad8": "AD8 - Dementia Screening",
+    "parkinsons": "Parkinson's Assessment",
+    "startTest": "Start Assessment",
+    "duration": "Estimated duration: {{minutes}} minutes"
+  },
+  "results": {
+    "title": "Results",
+    "riskLevel": "Risk Level",
+    "score": "Score",
+    "recommendations": "Recommendations",
+    "lowRisk": "Low Risk",
+    "moderateRisk": "Moderate Risk",
+    "highRisk": "High Risk",
+    "viewHistory": "View History",
+    "exportResults": "Export Results"
+  }
+}

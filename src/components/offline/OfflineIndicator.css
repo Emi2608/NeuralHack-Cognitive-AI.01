@@ -1,0 +1,221 @@
+/* Offline Indicator Styles */
+
+.offline-indicator {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: var(--ion-color-step-50);
+  border-radius: 20px;
+  padding: 4px 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.offline-indicator-top {
+  top: 10px;
+}
+
+.offline-indicator-bottom {
+  bottom: 10px;
+}
+
+.offline-status-button {
+  --color: var(--ion-color-dark);
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 4px;
+  --padding-bottom: 4px;
+  margin: 0;
+  height: auto;
+  font-size: 14px;
+}
+
+.offline-status-text {
+  margin: 0 8px;
+  font-weight: 500;
+}
+
+.offline-badge {
+  margin-left: 4px;
+  font-size: 12px;
+  min-width: 18px;
+  height: 18px;
+}
+
+/* Modal Content */
+.offline-actions {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.offline-action-button {
+  margin: 0;
+}
+
+.offline-info {
+  padding: 16px;
+  background: var(--ion-color-light);
+  margin: 16px;
+  border-radius: 8px;
+}
+
+.offline-info ion-note {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* High contrast mode support */
+.high-contrast .offline-indicator {
+  background: var(--ion-color-dark);
+  border: 2px solid var(--ion-color-primary);
+}
+
+.high-contrast .offline-status-button {
+  --color: var(--ion-color-primary-contrast);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .offline-indicator {
+    left: 10px;
+    right: 10px;
+    transform: none;
+    width: auto;
+  }
+  
+  .offline-status-text {
+    display: none;
+  }
+  
+  .offline-status-button {
+    --padding-start: 12px;
+    --padding-end: 12px;
+  }
+}
+
+/* Animation for sync progress */
+@keyframes syncPulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.offline-indicator.syncing {
+  animation: syncPulse 1.5s ease-in-out infinite;
+}
+
+/* Storage usage indicator */
+.storage-usage-bar {
+  margin-top: 8px;
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.storage-usage-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.storage-usage-fill.normal {
+  background: var(--ion-color-primary);
+}
+
+.storage-usage-fill.warning {
+  background: var(--ion-color-warning);
+}
+
+.storage-usage-fill.danger {
+  background: var(--ion-color-danger);
+}
+
+/* Accessibility improvements */
+.offline-indicator:focus-within {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offline-indicator.syncing {
+    animation: none;
+  }
+  
+  .storage-usage-fill {
+    transition: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .offline-indicator {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--ion-color-step-200);
+  }
+}
+
+/* Toast-style notifications for offline status */
+.offline-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  z-index: 10000;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideInRight 0.3s ease-out;
+}
+
+.offline-toast-success {
+  background-color: var(--ion-color-success);
+}
+
+.offline-toast-warning {
+  background-color: var(--ion-color-warning);
+}
+
+.offline-toast-error {
+  background-color: var(--ion-color-danger);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Compact mode for mobile */
+@media (max-width: 480px) {
+  .offline-actions {
+    padding: 12px;
+    gap: 8px;
+  }
+  
+  .offline-info {
+    margin: 12px;
+    padding: 12px;
+  }
+  
+  .offline-toast {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+}

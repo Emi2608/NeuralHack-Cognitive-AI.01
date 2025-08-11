@@ -1,0 +1,123 @@
+.assessment-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.loading-container ion-spinner {
+  margin-bottom: 1rem;
+}
+
+.assessment-error {
+  padding: 1rem;
+}
+
+.assessment-content {
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+.pause-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.pause-content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.pause-content ion-icon {
+  margin-bottom: 1rem;
+  color: var(--ion-color-warning);
+}
+
+.pause-content h2 {
+  margin: 1rem 0;
+  color: var(--ion-color-primary);
+}
+
+.time-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: var(--ion-color-warning);
+  color: var(--ion-color-warning-contrast);
+  font-weight: bold;
+}
+
+.time-indicator ion-icon {
+  margin-right: 0.5rem;
+}
+
+.question-container {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.progress-info {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.progress-info p {
+  margin: 0.25rem 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .question-container {
+    padding: 0.5rem;
+  }
+  
+  .pause-content {
+    padding: 1rem;
+  }
+  
+  .pause-content h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .pause-overlay {
+    transition: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .time-indicator {
+    border: 2px solid var(--ion-color-warning-contrast);
+  }
+  
+  .pause-overlay {
+    background: rgba(0, 0, 0, 0.95);
+  }
+}
+
+/* Large font support */
+.assessment-content.large-font {
+  font-size: 1.2em;
+}
+
+.assessment-content.extra-large-font {
+  font-size: 1.4em;
+}

@@ -1,0 +1,200 @@
+.instruction-content {
+  text-align: center;
+  padding: 1rem;
+}
+
+.instruction-content ion-icon {
+  margin-bottom: 1rem;
+}
+
+.instruction-content ul {
+  text-align: left;
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.instruction-content li {
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.memorization-content {
+  text-align: center;
+  padding: 1rem;
+}
+
+.timer-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--ion-color-primary);
+}
+
+.time-remaining {
+  font-size: 1.5rem;
+  color: var(--ion-color-warning);
+}
+
+.words-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1rem;
+  background: var(--ion-color-light);
+  border-radius: 12px;
+}
+
+.memory-word {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.75rem 1rem;
+  background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+  border-radius: 8px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.distraction-content {
+  text-align: center;
+  padding: 1rem;
+}
+
+.distraction-task {
+  margin: 2rem 0;
+  padding: 1rem;
+  background: var(--ion-color-warning-tint);
+  border-radius: 12px;
+}
+
+.counting-task {
+  margin-top: 1rem;
+}
+
+.numbers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.count-number {
+  display: inline-block;
+  padding: 0.5rem;
+  background: var(--ion-color-warning);
+  color: var(--ion-color-warning-contrast);
+  border-radius: 4px;
+  font-weight: bold;
+  min-width: 40px;
+  text-align: center;
+}
+
+.recall-content {
+  padding: 1rem;
+}
+
+.word-input {
+  margin: 1rem 0;
+}
+
+.recalled-words {
+  margin: 1.5rem 0;
+}
+
+.recalled-words h4 {
+  margin-bottom: 0.5rem;
+  color: var(--ion-color-primary);
+}
+
+.recalled-words ion-list {
+  background: var(--ion-color-light);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.recalled-words ion-item {
+  --background: transparent;
+  --padding-start: 0.5rem;
+  --padding-end: 0.5rem;
+}
+
+.recall-actions {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.recall-stats {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .words-display {
+    gap: 0.5rem;
+  }
+  
+  .memory-word {
+    font-size: 1.2rem;
+    padding: 0.5rem 0.75rem;
+    min-width: 60px;
+  }
+  
+  .numbers {
+    gap: 0.25rem;
+  }
+  
+  .count-number {
+    padding: 0.25rem;
+    min-width: 30px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  .timer-display {
+    animation: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .memory-word {
+    border: 2px solid var(--ion-color-primary-contrast);
+  }
+  
+  .distraction-task {
+    border: 2px solid var(--ion-color-warning);
+  }
+  
+  .count-number {
+    border: 1px solid var(--ion-color-warning-contrast);
+  }
+}
+
+/* Large Font Support */
+.memory-task.large-font .memory-word {
+  font-size: 1.8rem;
+}
+
+.memory-task.large-font .count-number {
+  font-size: 1.1rem;
+}
+
+.memory-task.extra-large-font .memory-word {
+  font-size: 2.2rem;
+}
+
+.memory-task.extra-large-font .count-number {
+  font-size: 1.3rem;
+}

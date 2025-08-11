@@ -1,0 +1,756 @@
+{
+  "app": {
+    "name": "NeuralHack Cognitive AI",
+    "tagline": "Detección temprana de enfermedades neurodegenerativas"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "assessments": "Evaluaciones",
+    "dashboard": "Panel",
+    "profile": "Perfil",
+    "education": "Educación"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "finish": "Finalizar",
+    "save": "Guardar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "confirm": "Confirmar",
+    "yes": "Sí",
+    "no": "No",
+    "add": "Agregar",
+    "remove": "Quitar",
+    "undo": "Deshacer",
+    "submit": "Enviar",
+    "goBack": "Volver"
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "signIn": "Iniciar Sesión",
+    "register": "Registrarse",
+    "signUp": "Registrarse",
+    "logout": "Cerrar Sesión",
+    "signOut": "Cerrar Sesión",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "resetPassword": "Restablecer Contraseña",
+    "consent": "Consentimiento",
+    "agreeToTerms": "Acepto los términos y condiciones",
+    "createAccount": "Crear Cuenta",
+    "emailRequired": "El correo electrónico es requerido",
+    "emailInvalid": "Ingresa un correo electrónico válido",
+    "emailPlaceholder": "tu@email.com",
+    "passwordRequired": "La contraseña es requerida",
+    "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+    "passwordPlaceholder": "Mínimo 8 caracteres",
+    "passwordsDoNotMatch": "Las contraseñas no coinciden",
+    "confirmPasswordPlaceholder": "Confirma tu contraseña",
+    "showPassword": "Mostrar contraseña",
+    "dateOfBirth": "Fecha de Nacimiento",
+    "dateOfBirthRequired": "La fecha de nacimiento es requerida",
+    "selectDate": "Selecciona una fecha",
+    "educationLevel": "Nivel de Educación",
+    "selectEducationLevel": "Selecciona años de educación",
+    "noFormalEducation": "Sin educación formal",
+    "years": "años",
+    "mustBeAdult": "Debes ser mayor de 18 años",
+    "invalidAge": "Por favor verifica tu fecha de nacimiento",
+    "invalidEducationLevel": "Los años de educación deben estar entre 0 y 30",
+    "consentRequired": "Debes aceptar los términos y condiciones",
+    "consentText": "Acepto los términos y condiciones de uso y la política de privacidad",
+    "noAccount": "¿No tienes cuenta?",
+    "resetPasswordInstructions": "Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.",
+    "sendResetEmail": "Enviar Enlace",
+    "resetEmailSent": "Se ha enviado un enlace a tu correo electrónico",
+    "resetFailed": "Error al enviar el enlace de restablecimiento",
+    "enterEmailForReset": "Por favor ingresa tu correo electrónico"
+  },
+  "assessments": {
+    "title": "Evaluaciones Cognitivas",
+    "selectTest": "Selecciona una evaluación",
+    "moca": {
+      "name": "MoCA - Evaluación Cognitiva de Montreal"
+    },
+    "phq9": {
+      "name": "PHQ-9 - Cuestionario de Salud del Paciente"
+    },
+    "mmse": {
+      "name": "MMSE - Mini Examen del Estado Mental"
+    },
+    "ad8": {
+      "name": "AD8 - Detección de Demencia"
+    },
+    "parkinsons": {
+      "name": "Evaluación de Parkinson"
+    },
+    "startTest": "Iniciar Evaluación",
+    "duration": "Duración estimada: {{minutes}} minutos"
+  },
+  "results": {
+    "title": "Resultados",
+    "riskLevel": "Nivel de Riesgo",
+    "score": "Puntuación",
+    "recommendations": "Recomendaciones",
+    "lowRisk": "Riesgo Bajo",
+    "moderateRisk": "Riesgo Moderado",
+    "highRisk": "Riesgo Alto",
+    "viewHistory": "Ver Historial",
+    "exportResults": "Exportar Resultados"
+  },
+  "consent": {
+    "title": "Consentimiento Informado",
+    "welcome": "¡Bienvenido a NeuralHack Cognitive AI!",
+    "welcomeMessage": "Para continuar, necesitamos tu consentimiento para procesar tus datos de salud de manera segura.",
+    "introduction": "Tu privacidad y seguridad son nuestra prioridad. Lee cuidadosamente cada punto y acepta solo aquellos con los que te sientes cómodo.",
+    "accept": "Acepto y Continuar",
+    "decline": "Rechazar",
+    "optional": "(Opcional)",
+    "requiredFields": "Campos requeridos para usar la aplicación",
+    "rightsNotice": "Puedes retirar tu consentimiento en cualquier momento desde la configuración de tu perfil. Tienes derecho a acceder, corregir o eliminar tus datos personales.",
+    "lastUpdated": "Última actualización",
+    "dataCollection": {
+      "title": "Recopilación de Datos",
+      "description": "Acepto que se recopilen mis datos demográficos (edad, educación) y respuestas a las evaluaciones cognitivas para proporcionar análisis de riesgo personalizado."
+    },
+    "dataProcessing": {
+      "title": "Procesamiento de Datos",
+      "description": "Acepto que mis datos sean procesados usando algoritmos validados clínicamente para calcular mi riesgo de deterioro cognitivo y generar recomendaciones personalizadas."
+    },
+    "dataStorage": {
+      "title": "Almacenamiento Seguro",
+      "description": "Acepto que mis datos sean almacenados de forma encriptada en servidores seguros cumpliendo con GDPR, HIPAA y regulaciones mexicanas de protección de datos."
+    },
+    "medicalPurpose": {
+      "title": "Propósito Médico",
+      "description": "Entiendo que esta aplicación es un dispositivo médico de software (SaMD) para tamizaje, no para diagnóstico definitivo, y que debo consultar a un profesional de la salud para interpretación médica."
+    },
+    "researchParticipation": {
+      "title": "Participación en Investigación",
+      "description": "Acepto que mis datos anonimizados puedan ser utilizados para investigación científica sobre enfermedades neurodegenerativas en colaboración con instituciones académicas mexicanas."
+    },
+    "marketingCommunications": {
+      "title": "Comunicaciones de Marketing",
+      "description": "Acepto recibir información sobre nuevas características, consejos de salud cognitiva y contenido educativo relacionado con la prevención de enfermedades neurodegenerativas."
+    },
+    "additionalInfo": {
+      "title": "Información Adicional de Seguridad",
+      "dataEncryption": "Todos los datos están encriptados con AES-256",
+      "gdprCompliance": "Cumplimiento total con GDPR y LFTIDPI",
+      "medicalDevice": "Registrado como dispositivo médico ante COFEPRIS",
+      "clinicalValidation": "Validado clínicamente con instituciones mexicanas"
+    },
+    "contact": {
+      "title": "Contacto",
+      "email": "Soporte",
+      "privacy": "Privacidad"
+    }
+  },
+  "accessibility": {
+    "title": "Configuración de Accesibilidad",
+    "highContrast": {
+      "title": "Alto Contraste",
+      "description": "Mejora la visibilidad con colores de alto contraste"
+    },
+    "fontSize": {
+      "title": "Tamaño de Fuente",
+      "description": "Ajusta el tamaño del texto para mejor legibilidad",
+      "normal": "Normal",
+      "large": "Grande",
+      "extraLarge": "Extra Grande"
+    },
+    "voiceGuidance": {
+      "title": "Guía de Voz",
+      "description": "Escucha las instrucciones y preguntas en voz alta"
+    },
+    "keyboardNavigation": {
+      "title": "Navegación por Teclado",
+      "description": "Navega usando solo el teclado"
+    },
+    "touchTarget": {
+      "title": "Tamaño de Botones",
+      "description": "Ajusta el tamaño de los botones para facilitar el toque",
+      "normal": "Normal",
+      "large": "Grande"
+    }
+  },
+  "profile": {
+    "title": "Mi Perfil",
+    "personalInfo": "Información Personal",
+    "accountInfo": "Información de Cuenta",
+    "memberSince": "Miembro desde",
+    "lastUpdated": "Última actualización",
+    "consentGiven": "Consentimiento otorgado",
+    "settings": "Configuración",
+    "changePassword": "Cambiar Contraseña",
+    "deleteAccount": "Eliminar Cuenta",
+    "exportData": "Exportar Mis Datos",
+    "age": "Edad",
+    "actions": "Acciones",
+    "settingsDescription": "Actualiza tu información personal y preferencias de accesibilidad",
+    "changePasswordDescription": "Cambia tu contraseña de acceso",
+    "exportDataDescription": "Descarga todos tus datos en formato PDF o CSV",
+    "signOutDescription": "Cerrar sesión en este dispositivo",
+    "deleteAccountDescription": "Eliminar permanentemente tu cuenta y todos los datos",
+    "signOutConfirmation": "¿Estás seguro de que quieres cerrar sesión?",
+    "deleteAccountConfirmation": "Esta acción no se puede deshacer. Se eliminarán todos tus datos permanentemente."
+  },
+  "assessment": {
+    "loading": "Cargando evaluación...",
+    "error": {
+      "title": "Error en la Evaluación"
+    },
+    "progress": {
+      "question": "Pregunta {{current}} de {{total}}",
+      "section": "Sección: {{section}}"
+    },
+    "paused": {
+      "title": "Evaluación Pausada",
+      "message": "La evaluación está pausada. Puedes reanudarla cuando estés listo.",
+      "resume": "Reanudar"
+    },
+    "exit": {
+      "title": "Salir de la Evaluación",
+      "message": "¿Estás seguro de que quieres salir? Tu progreso se guardará automáticamente.",
+      "confirm": "Salir"
+    },
+    "timeout": {
+      "title": "Tiempo Agotado",
+      "message": "Se ha agotado el tiempo para esta pregunta. Continuaremos con la siguiente.",
+      "continue": "Continuar"
+    },
+    "autoSave": {
+      "success": "Progreso guardado automáticamente"
+    },
+    "complete": "Completar Evaluación",
+    "required": "Campo requerido",
+    "timeLimit": "Tiempo límite: {{seconds}} segundos",
+    "enterNumber": "Ingresa un número",
+    "enterText": "Ingresa tu respuesta"
+  },
+  "drawing": {
+    "undo": "Deshacer último trazo",
+    "clearAll": "Limpiar todo",
+    "stats": "{{strokes}} trazos, {{time}} segundos",
+    "clear": {
+      "title": "Limpiar Dibujo",
+      "message": "¿Estás seguro de que quieres borrar todo el dibujo?",
+      "confirm": "Limpiar"
+    }
+  },
+  "memoryTask": {
+    "instruction": {
+      "title": "Tarea de Memoria",
+      "description": "En esta tarea evaluaremos tu capacidad de memoria a corto plazo.",
+      "steps": "La tarea consta de tres fases:",
+      "step1": "Memorización: Verás una lista de palabras durante {{time}} segundos",
+      "step2": "Distracción: Realizarás una tarea de distracción durante {{time}} segundos",
+      "step3": "Recuerdo: Deberás recordar tantas palabras como puedas"
+    },
+    "start": "Comenzar Tarea",
+    "memorization": {
+      "title": "Fase de Memorización",
+      "instruction": "Memoriza estas palabras. Aparecerán en la siguiente fase."
+    },
+    "distraction": {
+      "title": "Fase de Distracción",
+      "task": "Tarea de Distracción",
+      "instruction": "Realiza esta tarea mientras esperas. No pienses en las palabras anteriores.",
+      "countBackwards": "Cuenta hacia atrás de 7 en 7 desde 100:"
+    },
+    "recall": {
+      "title": "Fase de Recuerdo",
+      "instruction": "Ahora escribe todas las palabras que recuerdes de la primera fase:",
+      "placeholder": "Escribe una palabra...",
+      "yourWords": "Tus palabras",
+      "complete": "Completar Tarea",
+      "tryAgain": "Intentar de Nuevo",
+      "attempts": "Intento {{current}} de {{max}}"
+    }
+  },
+  "attentionTask": {
+    "digit_span": {
+      "title": "Prueba de Dígitos",
+      "instruction": "Verás una secuencia de números. Después deberás repetirla en el mismo orden.",
+      "example": "Por ejemplo: si ves 3-7-2, deberás ingresar 3-7-2.",
+      "watching": "Observa la secuencia...",
+      "enterSequence": "Ingresa la secuencia que viste:"
+    },
+    "trail_making": {
+      "title": "Prueba de Conexión",
+      "instruction": "Conecta los números en orden ascendente lo más rápido posible.",
+      "example": "Conecta 1-2-3-4... hasta el 25."
+    },
+    "sustained_attention": {
+      "title": "Atención Sostenida",
+      "instruction": "Mantén tu atención y responde solo cuando veas el estímulo objetivo.",
+      "example": "Presiona el botón solo cuando veas la letra 'X'."
+    },
+    "startPractice": "Comenzar Práctica",
+    "level": "Nivel {{level}}",
+    "progress": "Correctas: {{correct}}/{{total}}",
+    "completed": "Tarea Completada",
+    "results": "Resultados:",
+    "maxLevel": "Nivel máximo alcanzado: {{level}}",
+    "accuracy": "Precisión: {{accuracy}}%",
+    "completionTime": "Tiempo total: {{time}} segundos"
+  },
+  "moca": {
+    "sections": {
+      "visuospatial": "Habilidades Visuoespaciales/Ejecutivas",
+      "naming": "Denominación",
+      "memory": "Memoria",
+      "attention": "Atención",
+      "language": "Lenguaje",
+      "abstraction": "Abstracción",
+      "delayed_recall": "Recuerdo Diferido",
+      "orientation": "Orientación"
+    },
+    "instructions": {
+      "trailMaking": "Conecte los números y letras alternando: 1-A-2-B-3-C-4-D-5",
+      "cubeCopy": "Copie este cubo manteniendo la perspectiva 3D",
+      "clockDrawing": "Dibuje un reloj que marque las 11:10",
+      "naming": "Diga el nombre de cada animal que ve",
+      "memoryRegistration": "Memorice estas palabras para recordarlas después",
+      "digitSpan": "Repita los números en el mismo orden",
+      "digitSpanBackward": "Repita los números en orden inverso",
+      "vigilance": "Toque cuando escuche la letra A",
+      "serial7s": "Reste 7 de 100 y continúe restando 7",
+      "sentenceRepetition": "Repita exactamente la frase que escuche",
+      "fluency": "Diga palabras que comiencen con F (1 minuto)",
+      "abstraction": "Diga qué tienen en común estos objetos",
+      "delayedRecall": "Recuerde las 5 palabras del inicio",
+      "orientation": "Responda sobre la fecha y lugar actual"
+    },
+    "tasks": {
+      "trailMaking": {
+        "title": "Conexión de Puntos",
+        "instruction": "Conecte alternando números y letras"
+      },
+      "cubeDrawing": {
+        "title": "Copia del Cubo",
+        "instruction": "Mantenga la perspectiva tridimensional"
+      },
+      "clockDrawing": {
+        "title": "Dibujo del Reloj",
+        "instruction": "Incluya números y manecillas en 11:10"
+      },
+      "naming": {
+        "title": "Denominación de Animales",
+        "lion": "León",
+        "rhino": "Rinoceronte", 
+        "camel": "Camello"
+      },
+      "memory": {
+        "title": "Registro de Memoria",
+        "words": ["CARA", "SEDA", "IGLESIA", "CLAVEL", "ROJO"]
+      },
+      "attention": {
+        "digitSpan": "Repetición de Dígitos",
+        "vigilance": "Vigilancia Auditiva",
+        "serial7s": "Sustracción Seriada"
+      },
+      "language": {
+        "repetition": "Repetición de Frases",
+        "fluency": "Fluidez Verbal"
+      },
+      "abstraction": {
+        "similarities": "Semejanzas",
+        "trainBike": "Tren y Bicicleta",
+        "clockRuler": "Reloj y Regla"
+      },
+      "recall": {
+        "title": "Recuerdo Diferido",
+        "instruction": "Sin ayuda, recuerde las 5 palabras"
+      },
+      "orientation": {
+        "date": "Fecha de hoy",
+        "day": "Día de la semana", 
+        "place": "Lugar actual",
+        "city": "Ciudad actual"
+      }
+    },
+    "scoring": {
+      "educationAdjustment": "Ajuste por educación: +1 punto",
+      "totalScore": "Puntuación total: {{score}}/30",
+      "sectionScore": "{{section}}: {{score}}/{{max}}",
+      "normalRange": "26-30: Normal",
+      "mildImpairment": "18-25: Deterioro cognitivo leve",
+      "significantImpairment": "0-17: Deterioro cognitivo significativo"
+    }
+  },
+  "phq9": {
+    "title": "Cuestionario de Salud del Paciente-9",
+    "description": "Evaluación de síntomas depresivos",
+    "instructions": "Durante las últimas 2 semanas, ¿con qué frecuencia ha tenido molestias debido a los siguientes problemas?",
+    "timeframe": "Últimas 2 semanas",
+    "questions": {
+      "q1": "Poco interés o placer en hacer cosas",
+      "q2": "Se ha sentido decaído(a), deprimido(a) o sin esperanzas",
+      "q3": "Dificultad para quedarse o permanecer dormido(a), o dormir demasiado",
+      "q4": "Se ha sentido cansado(a) o con poca energía",
+      "q5": "Falta de apetito o comer en exceso",
+      "q6": "Se ha sentido mal con usted mismo(a) — o que es un fracaso o que ha quedado mal con usted mismo(a) o con su familia",
+      "q7": "Dificultad para concentrarse en cosas, tales como leer el periódico o ver la televisión",
+      "q8": "¿Se ha movido o hablado tan lento que otras personas podrían haberlo(a) notado? O lo contrario — muy inquieto(a) o agitado(a), ha estado moviéndose mucho más de lo normal",
+      "q9": "Pensamientos de que estaría mejor muerto(a) o de lastimarse de alguna manera",
+      "functional": "¿Qué tan difícil le han hecho estos problemas hacer su trabajo, encargarse de las tareas del hogar, o llevarse bien con otras personas?"
+    },
+    "options": {
+      "notAtAll": "Para nada",
+      "severalDays": "Varios días",
+      "moreThanHalf": "Más de la mitad de los días",
+      "nearlyEvery": "Casi todos los días",
+      "notDifficult": "Para nada difícil",
+      "somewhatDifficult": "Algo difícil",
+      "veryDifficult": "Muy difícil",
+      "extremelyDifficult": "Extremadamente difícil"
+    },
+    "frequency": {
+      "never": "Nunca en las últimas 2 semanas",
+      "several": "2-6 días en las últimas 2 semanas",
+      "moreThanHalf": "7-11 días en las últimas 2 semanas",
+      "nearly": "12-14 días en las últimas 2 semanas"
+    },
+    "severity": {
+      "minimal": "Depresión mínima",
+      "mild": "Depresión leve",
+      "moderate": "Depresión moderada",
+      "moderatelySevere": "Depresión moderadamente severa",
+      "severe": "Depresión severa"
+    },
+    "scoring": {
+      "total": "Puntuación total: {{score}}/27",
+      "interpretation": "Interpretación: {{severity}}",
+      "functionalImpact": "Impacto funcional: {{impact}}"
+    },
+    "alerts": {
+      "suicidalIdeation": {
+        "title": "Atención Importante",
+        "message": "Ha indicado pensamientos sobre la muerte o autolesión. Es muy importante que hable con un profesional de la salud inmediatamente.",
+        "resources": "Recursos de Crisis Inmediatos",
+        "emergency": "Si está en peligro inmediato, busque ayuda ahora."
+      }
+    },
+    "crisisResources": {
+      "mexico": {
+        "lineaVida": "Línea de la Vida: 800 911 2000",
+        "saptel": "SAPTEL: 55 5259 8121",
+        "emergency": "Emergencias: 911"
+      }
+    }
+  },
+  "risk": {
+    "low": "Bajo",
+    "moderate": "Moderado", 
+    "high": "Alto"
+  },
+  "dashboard": {
+    "title": "Panel de Control",
+    "pullToRefresh": "Desliza para actualizar",
+    "refreshing": "Actualizando...",
+    "export": "Exportar",
+    "share": "Compartir",
+    "overallRisk": "Riesgo General",
+    "latestScores": "Puntuaciones Recientes",
+    "noAssessments": "No hay evaluaciones disponibles",
+    "trendAnalysis": "Análisis de Tendencias",
+    "needMoreData": "Se necesitan más datos para mostrar tendencias",
+    "trendRequirement": "Realiza al menos 2 evaluaciones para ver el análisis de tendencias",
+    "assessmentHistory": "Historial de Evaluaciones",
+    "recommendations": "Recomendaciones",
+    "score": "Puntuación",
+    "duration": "Duración",
+    "noAssessmentsYet": "Aún no has realizado evaluaciones",
+    "takeFirstAssessment": "Realiza tu primera evaluación para ver los resultados aquí",
+    "selectedForCompare": "Seleccionadas para comparar: {{count}}",
+    "compare": "Comparar",
+    "compareMode": "Modo Comparación",
+    "exitCompare": "Salir de Comparación",
+    "overallScore": "Puntuación General",
+    "riskAssessment": "Evaluación de Riesgo",
+    "sectionScores": "Puntuaciones por Sección",
+    "loadError": "Error al cargar los datos del panel",
+    "refreshed": "Datos actualizados correctamente",
+    "exportSuccess": "Datos exportados correctamente",
+    "exportError": "Error al exportar los datos",
+    "shareSuccess": "Datos compartidos correctamente",
+    "shareError": "Error al compartir los datos"
+  },
+  "priority": {
+    "low": "Baja",
+    "medium": "Media",
+    "high": "Alta",
+    "emergency": "Emergencia"
+  },
+  "recommendations": {
+    "noAssessments": "No hay evaluaciones disponibles",
+    "takeAssessmentFirst": "Realiza una evaluación primero para recibir recomendaciones",
+    "actionSteps": "Pasos a seguir",
+    "resources": "Recursos",
+    "allGood": "¡Todo se ve bien!",
+    "keepUpGoodWork": "Continúa con tus buenos hábitos de salud",
+    "refresh": "Actualizar",
+    "emergencyTitle": "Atención Médica Urgente",
+    "emergencyMessage": "Tus resultados sugieren que debes consultar con un profesional de la salud lo antes posible."
+  },
+  "education": {
+    "title": "Contenido Educativo",
+    "searchPlaceholder": "Buscar artículos...",
+    "allCategories": "Todas",
+    "noArticlesFound": "No se encontraron artículos",
+    "tryDifferentSearch": "Intenta con diferentes términos de búsqueda",
+    "clearSearch": "Limpiar búsqueda",
+    "readArticle": "Leer Artículo",
+    "minutesRead": "min de lectura",
+    "recommendedForYou": "Recomendado para Ti",
+    "noRecommendationsYet": "Aún no hay recomendaciones disponibles",
+    "takeAssessmentForRecommendations": "Realiza una evaluación para recibir recomendaciones personalizadas",
+    "basedOnRisk": "Basado en {{test}} - Riesgo {{risk}}",
+    "viewAllRecommendations": "Ver todas las recomendaciones ({{count}})",
+    "readingStats": "Estadísticas de Lectura",
+    "articlesRead": "Artículos Leídos",
+    "timeSpent": "Tiempo Invertido",
+    "completed": "Completados",
+    "bookmarked": "Guardados",
+    "completionRate": "Tasa de Finalización",
+    "favoriteCategory": "Categoría Favorita",
+    "noFavoriteYet": "Sin favorita aún",
+    "noReadingStatsYet": "Aún no tienes estadísticas de lectura",
+    "startReadingToSeeStats": "Comienza a leer artículos para ver tus estadísticas",
+    "difficulty": {
+      "beginner": "Básico",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    },
+    "engagement": {
+      "excellent": "Excelente",
+      "excellentMessage": "¡Felicitaciones! Tienes un gran compromiso con tu educación",
+      "good": "Bueno",
+      "goodMessage": "Buen progreso, sigue así",
+      "fair": "Regular",
+      "fairMessage": "Puedes mejorar terminando más artículos",
+      "needsImprovement": "Mejorable",
+      "improvementMessage": "Intenta completar más artículos que inicias"
+    },
+    "categories": {
+      "alzheimer_prevention": "Prevención de Alzheimer",
+      "parkinson_prevention": "Prevención de Parkinson",
+      "dementia_prevention": "Prevención de Demencia",
+      "depression_prevention": "Prevención de Depresión",
+      "lifestyle_factors": "Factores de Estilo de Vida",
+      "nutrition": "Nutrición",
+      "exercise": "Ejercicio",
+      "sleep": "Sueño",
+      "cognitive_training": "Entrenamiento Cognitivo",
+      "risk_factors": "Factores de Riesgo",
+      "early_detection": "Detección Temprana",
+      "medical_resources": "Recursos Médicos"
+    }
+  },
+  "longitudinal": {
+    "title": "Seguimiento Longitudinal",
+    "loginRequiredMessage": "Inicia sesión para ver tu seguimiento longitudinal",
+    "noDataYet": "Sin Datos Aún",
+    "takeAssessmentsMessage": "Realiza al menos 2 evaluaciones para ver tu seguimiento longitudinal",
+    "tabs": {
+      "overview": "Resumen",
+      "trends": "Tendencias",
+      "alerts": "Alertas",
+      "reminders": "Recordatorios"
+    },
+    "alerts": {
+      "title": "Alertas de Cambios",
+      "noAlerts": "No hay alertas",
+      "noAlertsMessage": "No se han detectado cambios significativos en tus evaluaciones",
+      "acknowledgeTitle": "Confirmar Alerta",
+      "acknowledgeMessage": "¿Has revisado esta alerta y deseas marcarla como vista?",
+      "acknowledge": "Marcar como Vista",
+      "acknowledgedAt": "Vista el {{date}}",
+      "change": "Cambio",
+      "timeframe": "Período",
+      "recommendations": "Recomendaciones"
+    },
+    "severity": {
+      "critical": "Crítico",
+      "high": "Alto",
+      "medium": "Medio",
+      "low": "Bajo"
+    },
+    "timeAgo": {
+      "justNow": "Ahora mismo",
+      "minutes": "hace {{count}} min",
+      "hours": "hace {{count}}h",
+      "days": "hace {{count}}d"
+    },
+    "trend": {
+      "improving": "Mejorando",
+      "stable": "Estable",
+      "declining": "Declinando",
+      "unknown": "Sin datos suficientes"
+    },
+    "chart": {
+      "title": "Análisis de Tendencias",
+      "noData": "Datos Insuficientes",
+      "needMoreAssessments": "Realiza al menos 2 evaluaciones para ver el análisis de tendencias",
+      "testType": "Tipo de Evaluación",
+      "allTests": "Todas las Evaluaciones",
+      "month": "Mes",
+      "quarter": "Trimestre",
+      "year": "Año",
+      "date": "Fecha",
+      "score": "Puntuación",
+      "dataPoints": "{{count}} evaluaciones analizadas"
+    },
+    "reminders": {
+      "title": "Recordatorios de Evaluación",
+      "description": "Configura recordatorios automáticos para realizar evaluaciones regulares y mantener un seguimiento continuo de tu salud cognitiva.",
+      "noReminders": "Sin Recordatorios",
+      "noRemindersMessage": "No tienes recordatorios configurados. Agregar recordatorios te ayudará a mantener un seguimiento regular.",
+      "addReminder": "Agregar Recordatorio",
+      "addReminderTitle": "Nuevo Recordatorio",
+      "selectTestType": "Selecciona el tipo de evaluación para el recordatorio:",
+      "deleteTitle": "Eliminar Recordatorio",
+      "deleteMessage": "¿Estás seguro de que deseas eliminar este recordatorio?",
+      "nextReminder": "Próximo recordatorio",
+      "customMessage": "Mensaje personalizado (opcional)",
+      "customMessagePlaceholder": "Escribe un mensaje personalizado para este recordatorio...",
+      "frequency": {
+        "label": "Frecuencia",
+        "weekly": "Semanal",
+        "biweekly": "Quincenal",
+        "monthly": "Mensual",
+        "quarterly": "Trimestral"
+      },
+      "updated": "Recordatorio actualizado",
+      "added": "Recordatorio agregado",
+      "deleted": "Recordatorio eliminado",
+      "errors": {
+        "loadFailed": "Error al cargar recordatorios",
+        "updateFailed": "Error al actualizar recordatorio",
+        "addFailed": "Error al agregar recordatorio",
+        "deleteFailed": "Error al eliminar recordatorio"
+      }
+    },
+    "stats": {
+      "title": "Estadísticas Longitudinales",
+      "totalAssessments": "Total de Evaluaciones",
+      "averageInterval": "Intervalo Promedio",
+      "longestStreak": "Racha Más Larga",
+      "currentStreak": "Racha Actual",
+      "overallTrend": "Tendencia General",
+      "riskProgression": "Progresión de Riesgo",
+      "assessmentsByType": "Evaluaciones por Tipo",
+      "noInterval": "Sin intervalo",
+      "days": "días",
+      "weeks": "semanas",
+      "months": "meses",
+      "assessments": "evaluaciones"
+    }
+  },
+  "gdpr": {
+    "loading": "Cargando información de privacidad...",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfService": "Términos de Servicio",
+    "consent": {
+      "title": "Gestión de Consentimientos",
+      "description": "Controla cómo utilizamos tus datos personales. Puedes cambiar estos permisos en cualquier momento.",
+      "required": "Requerido",
+      "granted": "Consentimiento otorgado exitosamente",
+      "withdrawn": "Consentimiento retirado exitosamente",
+      "updated": "Consentimiento Actualizado",
+      "dataProcessingRequired": "El consentimiento para procesamiento de datos es requerido para usar la aplicación.",
+      "dataProcessing": {
+        "title": "Procesamiento de Datos",
+        "description": "Permitir el procesamiento de tus datos personales para proporcionar servicios de evaluación cognitiva."
+      },
+      "analytics": {
+        "title": "Análisis y Mejoras",
+        "description": "Permitir el uso de datos anonimizados para mejorar la aplicación y generar estadísticas de uso."
+      },
+      "research": {
+        "title": "Investigación Científica",
+        "description": "Permitir el uso de datos anonimizados para investigación científica sobre salud cognitiva."
+      }
+    },
+    "export": {
+      "title": "Exportar Mis Datos",
+      "description": "Descarga una copia completa de todos tus datos personales almacenados en nuestra plataforma.",
+      "format": "Formato de archivo",
+      "encrypt": "Encriptar archivo",
+      "encryptDescription": "Protege tu archivo de exportación con encriptación AES-256",
+      "download": "Descargar Mis Datos",
+      "exporting": "Exportando...",
+      "inProgress": "Preparando tu exportación de datos...",
+      "success": "Tus datos han sido exportados exitosamente",
+      "error": "Error al exportar datos. Por favor intenta nuevamente.",
+      "summary": "Resumen de Exportación",
+      "profileData": "Datos de Perfil",
+      "assessments": "Evaluaciones",
+      "auditLogs": "Registros de Auditoría",
+      "record": "registro",
+      "records": "registros",
+      "fileSize": "Tamaño del Archivo",
+      "encrypted": "Encriptado",
+      "encryptionEnabled": "Archivo protegido con encriptación",
+      "whatIsIncluded": "¿Qué se incluye en la exportación?",
+      "includes": {
+        "profile": "Información de perfil (email, fecha de nacimiento, educación)",
+        "assessments": "Resultados de todas las evaluaciones cognitivas",
+        "settings": "Configuraciones de accesibilidad y preferencias",
+        "auditLogs": "Historial de actividad en la cuenta"
+      },
+      "note": "Nota",
+      "noteText": "Los datos exportados no incluyen direcciones IP ni información del navegador por privacidad."
+    },
+    "deletion": {
+      "title": "Eliminar Mis Datos",
+      "warning": "¡ADVERTENCIA!",
+      "warningText": "La eliminación de datos es permanente e irreversible. Una vez eliminados, no podremos recuperar tu información.",
+      "selectData": "Seleccionar Datos a Eliminar",
+      "reason": "Motivo (opcional)",
+      "reasonPlaceholder": "Explica por qué deseas eliminar tus datos...",
+      "deleteSelected": "Eliminar Datos Seleccionados",
+      "deleteAll": "Eliminar Todos Mis Datos",
+      "deleting": "Eliminando...",
+      "selectDataTypes": "Por favor selecciona al menos un tipo de datos para eliminar",
+      "confirmTitle": "Confirmar Eliminación",
+      "confirmMessageFull": "Estás a punto de eliminar TODOS tus datos. Esta acción cerrará tu cuenta permanentemente.",
+      "confirmMessagePartial": "Estás a punto de eliminar los datos seleccionados. Esta acción no se puede deshacer.",
+      "confirmationText": "ELIMINAR",
+      "confirmationMismatch": "El texto de confirmación no coincide. Por favor escribe 'ELIMINAR' exactamente.",
+      "confirmDelete": "Confirmar Eliminación",
+      "success": "Tus datos han sido eliminados exitosamente. Tu cuenta será cerrada en breves momentos.",
+      "pending": "Tu solicitud de eliminación está siendo procesada. Recibirás una confirmación por email.",
+      "error": "Error al eliminar datos. Por favor contacta soporte.",
+      "dataTypes": {
+        "profile": "Datos de Perfil",
+        "profileDesc": "Email, fecha de nacimiento, nivel educativo y configuraciones",
+        "assessments": "Evaluaciones Cognitivas",
+        "assessmentsDesc": "Resultados y respuestas de todas las pruebas realizadas",
+        "auditLogs": "Registros de Auditoría",
+        "auditLogsDesc": "Historial de actividad (se anonimizará, no se eliminará completamente)"
+      },
+      "whatHappens": "¿Qué sucede cuando elimino mis datos?",
+      "consequences": {
+        "dataRemoved": "Todos los datos seleccionados serán eliminados permanentemente",
+        "accountClosed": "Si eliminas datos de perfil, tu cuenta será cerrada",
+        "auditKept": "Los registros de auditoría se mantienen anonimizados por cumplimiento legal",
+        "irreversible": "Esta acción es completamente irreversible"
+      }
+    },
+    "errors": {
+      "loadFailed": "Error al cargar información de privacidad",
+      "updateFailed": "Error al actualizar consentimiento"
+    }
+  }
+}

@@ -1,0 +1,199 @@
+.question-card {
+  margin: 1rem 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.question-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.question-instructions {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: var(--ion-color-light);
+  border-radius: 8px;
+}
+
+.question-instructions ion-icon {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.question-content {
+  margin: 1rem 0;
+}
+
+.validation-errors {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--ion-color-danger-tint);
+  border-radius: 8px;
+  border-left: 4px solid var(--ion-color-danger);
+}
+
+.validation-errors p {
+  margin: 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.required-indicator {
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.time-limit-indicator {
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Likert Scale Styling */
+.likert-scale {
+  padding: 1rem 0;
+}
+
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.scale-label {
+  flex: 1;
+  text-align: center;
+  min-width: 80px;
+}
+
+.scale-label.selected ion-button {
+  --color: var(--ion-color-primary);
+  font-weight: bold;
+}
+
+.scale-label ion-button {
+  --padding-start: 0.5rem;
+  --padding-end: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Radio and Checkbox Lists */
+.question-content ion-list {
+  background: transparent;
+}
+
+.question-content ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  --background: var(--ion-color-light);
+}
+
+.question-content ion-item:hover {
+  --background: var(--ion-color-light-shade);
+}
+
+.question-content ion-label {
+  margin: 0.75rem 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Input Fields */
+.question-content ion-input,
+.question-content ion-textarea {
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+  --padding-top: 0.75rem;
+  --padding-bottom: 0.75rem;
+  --background: var(--ion-color-light);
+  --border-radius: 8px;
+  margin: 0.5rem 0;
+}
+
+.question-content ion-input:focus-within,
+.question-content ion-textarea:focus-within {
+  --background: var(--ion-color-light-shade);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .question-card {
+    margin: 0.5rem 0;
+  }
+  
+  .question-title {
+    font-size: 1.1rem;
+  }
+  
+  .scale-labels {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .scale-label {
+    min-width: 120px;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  .question-content ion-item {
+    transition: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .question-card {
+    border: 2px solid var(--ion-color-medium);
+  }
+  
+  .question-instructions {
+    border: 1px solid var(--ion-color-primary);
+  }
+  
+  .validation-errors {
+    border: 2px solid var(--ion-color-danger);
+  }
+}
+
+/* Large Font Support */
+.question-card.large-font .question-title {
+  font-size: 1.4rem;
+}
+
+.question-card.large-font .question-content {
+  font-size: 1.1rem;
+}
+
+.question-card.extra-large-font .question-title {
+  font-size: 1.6rem;
+}
+
+.question-card.extra-large-font .question-content {
+  font-size: 1.3rem;
+}
+
+/* Touch Target Improvements */
+.question-content ion-item {
+  min-height: 48px;
+}
+
+.question-card.large-touch ion-item {
+  min-height: 56px;
+}
+
+.question-card.large-touch ion-button {
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+}

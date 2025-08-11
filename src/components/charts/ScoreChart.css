@@ -1,0 +1,80 @@
+.score-chart {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.score-chart .chart-container {
+  padding: 10px;
+}
+
+/* Risk level indicators */
+.score-chart .risk-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.risk-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+}
+
+.risk-legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.risk-legend-color.low {
+  background-color: rgba(34, 197, 94, 0.8);
+}
+
+.risk-legend-color.moderate {
+  background-color: rgba(251, 191, 36, 0.8);
+}
+
+.risk-legend-color.high {
+  background-color: rgba(239, 68, 68, 0.8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .score-chart .chart-container {
+    padding: 5px;
+  }
+  
+  .risk-legend {
+    gap: 12px;
+  }
+  
+  .risk-legend-item {
+    font-size: 0.75rem;
+  }
+}
+
+/* Animation for bars */
+@keyframes barGrow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.score-chart canvas {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

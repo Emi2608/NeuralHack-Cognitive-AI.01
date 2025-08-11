@@ -1,0 +1,209 @@
+.instruction-content {
+  text-align: center;
+  padding: 1rem;
+}
+
+.instruction-content p {
+  margin: 1rem 0;
+  line-height: 1.5;
+}
+
+.digit-span-content {
+  padding: 1rem;
+  text-align: center;
+}
+
+.level-indicator {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: var(--ion-color-primary-tint);
+  border-radius: 8px;
+}
+
+.level-indicator h3 {
+  margin: 0;
+  color: var(--ion-color-primary);
+}
+
+.digit-display {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--ion-color-light);
+  border-radius: 12px;
+}
+
+.current-digit {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--ion-color-primary);
+  margin-bottom: 1rem;
+  animation: digitPulse 0.5s ease-in-out;
+}
+
+@keyframes digitPulse {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.response-phase {
+  margin-top: 1rem;
+}
+
+.timer-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--ion-color-warning);
+}
+
+.user-sequence {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--ion-color-light);
+  border-radius: 8px;
+  min-height: 60px;
+  align-items: center;
+}
+
+.sequence-digit {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem 0.75rem;
+  background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+  border-radius: 6px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.number-pad {
+  margin: 1rem 0;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.number-pad ion-button {
+  --border-radius: 8px;
+  --padding-top: 1rem;
+  --padding-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0.25rem;
+}
+
+.sequence-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.progress-info {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--ion-color-light);
+  border-radius: 8px;
+}
+
+.completion-content {
+  text-align: center;
+  padding: 1rem;
+}
+
+.completion-content h3 {
+  color: var(--ion-color-success);
+  margin-bottom: 1rem;
+}
+
+.completion-content p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .current-digit {
+    font-size: 3rem;
+  }
+  
+  .sequence-digit {
+    font-size: 1.2rem;
+    padding: 0.4rem 0.6rem;
+    min-width: 35px;
+  }
+  
+  .number-pad ion-button {
+    --padding-top: 0.75rem;
+    --padding-bottom: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  .sequence-controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .sequence-controls ion-button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  .current-digit {
+    animation: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .digit-display {
+    border: 2px solid var(--ion-color-medium);
+  }
+  
+  .sequence-digit {
+    border: 2px solid var(--ion-color-primary-contrast);
+  }
+  
+  .number-pad ion-button {
+    --border-width: 2px;
+    --border-style: solid;
+    --border-color: var(--ion-color-medium);
+  }
+}
+
+/* Large Font Support */
+.attention-task.large-font .current-digit {
+  font-size: 4.5rem;
+}
+
+.attention-task.large-font .sequence-digit {
+  font-size: 1.8rem;
+}
+
+.attention-task.extra-large-font .current-digit {
+  font-size: 5rem;
+}
+
+.attention-task.extra-large-font .sequence-digit {
+  font-size: 2rem;
+}
+
+/* Touch Target Improvements */
+.number-pad.large-touch ion-button {
+  --padding-top: 1.25rem;
+  --padding-bottom: 1.25rem;
+  min-height: 56px;
+}

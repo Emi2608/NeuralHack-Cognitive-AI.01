@@ -1,0 +1,346 @@
+.longitudinal-content {
+  padding: 0;
+}
+
+.auth-required {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ion-color-medium);
+}
+
+.auth-required h2 {
+  color: var(--ion-color-dark);
+  margin-bottom: 16px;
+}
+
+.tab-navigation {
+  padding: 16px;
+  background: var(--ion-color-light);
+  border-bottom: 1px solid var(--ion-color-light-shade);
+}
+
+.tab-navigation ion-segment {
+  --background: transparent;
+}
+
+.tab-navigation ion-segment-button {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  min-width: auto;
+}
+
+.tab-navigation ion-segment-button ion-icon {
+  margin-bottom: 4px;
+}
+
+.tab-content {
+  padding: 16px;
+  min-height: 400px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 40px 20px;
+  color: var(--ion-color-medium);
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ion-color-medium);
+}
+
+.no-data ion-icon {
+  margin-bottom: 16px;
+  color: var(--ion-color-medium-shade);
+}
+
+.no-data h3 {
+  margin: 16px 0 8px 0;
+  color: var(--ion-color-dark);
+}
+
+.no-data p {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+/* Overview Tab Styles */
+.stats-overview {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.stats-overview h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--ion-color-primary);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--ion-color-light);
+  border-radius: 12px;
+  border: 1px solid var(--ion-color-light-shade);
+}
+
+.stat-icon {
+  font-size: 2em;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.stat-value {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: var(--ion-color-dark);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.8em;
+  color: var(--ion-color-medium);
+  margin-top: 4px;
+}
+
+.trend-overview {
+  margin-bottom: 32px;
+}
+
+.trend-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--ion-color-light);
+  border-radius: 12px;
+  border: 1px solid var(--ion-color-light-shade);
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.trend-icon {
+  font-size: 2.5em;
+  flex-shrink: 0;
+}
+
+.trend-content {
+  flex: 1;
+  text-align: center;
+}
+
+.trend-label {
+  font-size: 0.9em;
+  color: var(--ion-color-medium);
+  margin-bottom: 4px;
+}
+
+.trend-value {
+  font-size: 1.2em;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.trend-value.success {
+  color: var(--ion-color-success);
+}
+
+.trend-value.danger {
+  color: var(--ion-color-danger);
+}
+
+.trend-value.warning {
+  color: var(--ion-color-warning);
+}
+
+.trend-value.medium {
+  color: var(--ion-color-medium);
+}
+
+.assessments-by-type {
+  text-align: center;
+}
+
+.assessments-by-type h3 {
+  margin-bottom: 16px;
+  color: var(--ion-color-dark);
+}
+
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.type-card {
+  padding: 12px;
+  background: var(--ion-color-primary-tint);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.type-name {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+  margin-bottom: 4px;
+}
+
+.type-count {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--ion-color-primary-shade);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tab-navigation ion-segment {
+    --padding-start: 8px;
+    --padding-end: 8px;
+  }
+  
+  .tab-navigation ion-segment-button {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    min-width: auto;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+  
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .stat-icon {
+    font-size: 1.5em;
+  }
+  
+  .stat-value {
+    font-size: 1.3em;
+  }
+  
+  .trend-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  
+  .trend-icon {
+    font-size: 2em;
+  }
+  
+  .type-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  }
+}
+
+/* High contrast mode */
+.accessibility-high-contrast .tab-navigation {
+  background: var(--ion-color-dark);
+  border-color: var(--ion-color-light);
+}
+
+.accessibility-high-contrast .stat-card,
+.accessibility-high-contrast .trend-card {
+  background: var(--ion-color-dark-shade);
+  border-color: var(--ion-color-medium);
+}
+
+.accessibility-high-contrast .stat-value {
+  color: var(--ion-color-light);
+}
+
+.accessibility-high-contrast .stats-overview h2 {
+  color: var(--ion-color-primary-tint);
+}
+
+.accessibility-high-contrast .assessments-by-type h3 {
+  color: var(--ion-color-light);
+}
+
+.accessibility-high-contrast .type-card {
+  background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+}
+
+.accessibility-high-contrast .type-name,
+.accessibility-high-contrast .type-count {
+  color: var(--ion-color-primary-contrast);
+}
+
+.accessibility-high-contrast .no-data h3 {
+  color: var(--ion-color-light);
+}
+
+/* Large font support */
+.accessibility-font-large .stat-value {
+  font-size: 1.7em;
+}
+
+.accessibility-font-large .stat-label {
+  font-size: 0.9em;
+}
+
+.accessibility-font-large .trend-value {
+  font-size: 1.4em;
+}
+
+.accessibility-font-large .trend-label {
+  font-size: 1.1em;
+}
+
+.accessibility-font-extra-large .stat-value {
+  font-size: 2em;
+}
+
+.accessibility-font-extra-large .stat-label {
+  font-size: 1.1em;
+}
+
+.accessibility-font-extra-large .trend-value {
+  font-size: 1.6em;
+}
+
+.accessibility-font-extra-large .trend-label {
+  font-size: 1.3em;
+}
+
+/* Touch target improvements */
+.accessibility-touch-large .tab-navigation ion-segment-button {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+}

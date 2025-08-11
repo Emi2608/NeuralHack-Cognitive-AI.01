@@ -1,0 +1,113 @@
+.dashboard-container {
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.risk-overview-card {
+  height: 100%;
+}
+
+.risk-overview-card ion-card-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.scores-overview-card {
+  height: 100%;
+}
+
+.trend-card {
+  margin-bottom: 16px;
+}
+
+.history-card {
+  height: fit-content;
+}
+
+.recommendations-card {
+  height: fit-content;
+  position: sticky;
+  top: 16px;
+}
+
+.no-data-message {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--ion-color-medium);
+}
+
+.no-data-message p {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+}
+
+.no-data-message small {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 8px;
+  }
+  
+  .dashboard-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .dashboard-actions ion-button {
+    margin-bottom: 8px;
+  }
+  
+  .recommendations-card {
+    position: static;
+  }
+}
+
+/* Loading states */
+.dashboard-container.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Card animations */
+ion-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+ion-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  ion-card {
+    transition: none;
+  }
+  
+  ion-card:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .no-data-message {
+    color: var(--ion-color-dark);
+    border: 1px solid var(--ion-color-medium);
+    border-radius: 8px;
+  }
+}

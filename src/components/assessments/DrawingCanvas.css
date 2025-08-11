@@ -1,0 +1,106 @@
+.drawing-canvas-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.instructions-card {
+  margin-bottom: 1rem;
+}
+
+.instructions {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.instructions ion-icon {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.canvas-wrapper {
+  position: relative;
+  margin: 1rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.drawing-canvas {
+  display: block;
+  background: white;
+  touch-action: none;
+  user-select: none;
+}
+
+.drawing-canvas.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.canvas-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.canvas-controls ion-button {
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+}
+
+.drawing-stats {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .drawing-canvas-container {
+    padding: 0 0.5rem;
+  }
+  
+  .canvas-controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .canvas-controls ion-button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (pointer: coarse) {
+  .drawing-canvas {
+    cursor: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .canvas-wrapper {
+    border: 2px solid var(--ion-color-medium);
+  }
+  
+  .drawing-canvas {
+    border: 1px solid var(--ion-color-dark);
+  }
+}
+
+/* Accessibility Improvements */
+.drawing-canvas:focus {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+/* Large Touch Targets */
+.canvas-controls.large-touch ion-button {
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  min-height: 48px;
+}

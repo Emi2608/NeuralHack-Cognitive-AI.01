@@ -1,0 +1,141 @@
+.data-export-panel {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.data-export-panel ion-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.data-export-panel ion-card-title ion-icon {
+  font-size: 20px;
+}
+
+.export-progress {
+  margin: 16px 0;
+  text-align: center;
+}
+
+.export-progress p {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.export-actions {
+  margin-top: 20px;
+}
+
+.export-summary {
+  margin-top: 16px;
+  border: 1px solid var(--ion-color-success);
+}
+
+.export-summary ion-card-title {
+  color: var(--ion-color-success);
+  font-size: 16px;
+}
+
+.export-info {
+  margin-top: 16px;
+  background: var(--ion-color-light);
+}
+
+.export-info h4 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.export-info ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.export-info li {
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.export-info p {
+  margin: 12px 0 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Progress bar styling */
+ion-progress-bar {
+  --progress-background: var(--ion-color-primary);
+  --background: var(--ion-color-light);
+  height: 8px;
+  border-radius: 4px;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .data-export-panel * {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  ion-progress-bar {
+    --progress-background: var(--ion-color-primary);
+    animation: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .export-summary {
+    border-width: 2px;
+  }
+  
+  .export-info {
+    border: 1px solid var(--ion-color-medium);
+  }
+}
+
+/* Large text support */
+.accessibility-large-text .export-info li,
+.accessibility-large-text .export-info p {
+  font-size: 16px;
+}
+
+.accessibility-extra-large-text .export-info li,
+.accessibility-extra-large-text .export-info p {
+  font-size: 18px;
+}
+
+/* Focus indicators */
+ion-button:focus-visible {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+ion-select:focus-visible,
+ion-checkbox:focus-visible {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .data-export-panel {
+    margin: 0 8px;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .export-info {
+    background: var(--ion-color-dark-tint);
+  }
+  
+  .export-info h4,
+  .export-info li,
+  .export-info p {
+    color: var(--ion-color-light);
+  }
+}

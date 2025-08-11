@@ -1,0 +1,247 @@
+/* Login Page Styles */
+.login-page {
+  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --color: white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* Header Section */
+.login-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.app-logo {
+  margin-bottom: 1rem;
+}
+
+.logo-icon {
+  font-size: 4rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.app-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.app-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin: 0;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Form Container */
+.login-form-container {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+/* Override Ionic Card Styles */
+.login-form-container ion-card {
+  margin: 0;
+  box-shadow: none;
+  background: transparent;
+  border-radius: 0;
+}
+
+.login-form-container ion-card-header {
+  padding: 1.5rem 1.5rem 0.5rem;
+  text-align: center;
+}
+
+.login-form-container ion-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+}
+
+.login-form-container ion-card-content {
+  padding: 0.5rem 1.5rem 1.5rem;
+}
+
+/* Form Items */
+.login-form-container ion-item {
+  --background: transparent;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-width: 0 0 1px 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  margin-bottom: 1rem;
+}
+
+.login-form-container ion-item:last-of-type {
+  --border-width: 0;
+}
+
+.login-form-container ion-label {
+  font-weight: 500;
+  color: var(--ion-color-medium);
+}
+
+.login-form-container ion-input {
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+}
+
+/* Buttons */
+.login-form-container ion-button[expand="block"] {
+  margin: 1rem 0 0.5rem 0;
+  --border-radius: 8px;
+  height: 48px;
+  font-weight: 600;
+}
+
+.login-form-container ion-button[fill="clear"] {
+  --color: var(--ion-color-primary);
+  font-weight: 500;
+}
+
+/* Checkbox */
+.login-form-container ion-checkbox {
+  --size: 18px;
+  --checkmark-color: white;
+  --border-radius: 4px;
+}
+
+/* Error Messages */
+.login-form-container ion-text[color="danger"] {
+  font-size: 0.875rem;
+}
+
+.login-form-container ion-text[color="danger"] p {
+  margin: 0.25rem 0;
+  padding: 0.5rem;
+  background: rgba(var(--ion-color-danger-rgb), 0.1);
+  border-radius: 4px;
+  border-left: 3px solid var(--ion-color-danger);
+}
+
+/* Footer */
+.login-footer {
+  text-align: center;
+  opacity: 0.8;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.login-footer p {
+  margin: 0.25rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+  
+  .app-title {
+    font-size: 1.5rem;
+  }
+  
+  .app-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .logo-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 3rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .login-container {
+    min-height: auto;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .login-header {
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Animation */
+.login-container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading State */
+.login-form-container ion-spinner {
+  --color: white;
+}
+
+/* Focus States */
+.login-form-container ion-input.has-focus {
+  --border-color: var(--ion-color-primary);
+  --border-width: 0 0 2px 0;
+}
+
+/* Modal Improvements */
+ion-modal.login-modal ion-content {
+  --background: white;
+}
+
+ion-modal.login-modal ion-toolbar {
+  --background: var(--ion-color-primary);
+  --color: white;
+}
+
+ion-modal.login-modal ion-title {
+  font-weight: 600;
+}
+
+/* Success States */
+.login-form-container ion-text[color="success"] p {
+  background: rgba(var(--ion-color-success-rgb), 0.1);
+  border-left: 3px solid var(--ion-color-success);
+  color: var(--ion-color-success);
+}

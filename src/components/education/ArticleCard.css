@@ -1,0 +1,200 @@
+.article-card {
+  margin: 0 0 16px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.article-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.article-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.article-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.category-chip {
+  align-self: flex-start;
+  --background: rgba(var(--ion-color-primary-rgb), 0.1);
+  --color: var(--ion-color-primary);
+  font-size: 0.8em;
+}
+
+.category-icon {
+  margin-right: 4px;
+}
+
+.difficulty-badge {
+  align-self: flex-start;
+  font-size: 0.7em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bookmark-button {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  margin: -8px -8px 0 0;
+}
+
+.article-title {
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 8px 0;
+  color: var(--ion-color-dark);
+}
+
+.article-summary {
+  font-size: 0.9em;
+  line-height: 1.4;
+  color: var(--ion-color-medium);
+  margin-bottom: 0;
+}
+
+.article-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8em;
+  color: var(--ion-color-medium);
+}
+
+.detail-item ion-icon {
+  font-size: 1em;
+  color: var(--ion-color-medium-shade);
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.tag-chip {
+  --background: transparent;
+  --color: var(--ion-color-medium);
+  font-size: 0.7em;
+  height: 24px;
+}
+
+.more-tags {
+  --color: var(--ion-color-primary);
+  font-weight: 600;
+}
+
+.article-actions {
+  margin-top: auto;
+}
+
+.read-button {
+  --color: var(--ion-color-primary);
+  font-weight: 500;
+  text-transform: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .article-meta {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .category-chip,
+  .difficulty-badge {
+    align-self: center;
+  }
+  
+  .article-details {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .detail-item {
+    flex: 0 0 auto;
+  }
+}
+
+/* High contrast mode */
+.accessibility-high-contrast .article-card {
+  border: 2px solid var(--ion-color-light);
+  background: var(--ion-color-dark);
+}
+
+.accessibility-high-contrast .article-title {
+  color: var(--ion-color-light);
+}
+
+.accessibility-high-contrast .article-summary {
+  color: var(--ion-color-light-shade);
+}
+
+.accessibility-high-contrast .detail-item {
+  color: var(--ion-color-light-shade);
+}
+
+.accessibility-high-contrast .tag-chip {
+  --color: var(--ion-color-light);
+  border-color: var(--ion-color-light);
+}
+
+/* Large font support */
+.accessibility-font-large .article-title {
+  font-size: 1.3em;
+}
+
+.accessibility-font-large .article-summary {
+  font-size: 1.1em;
+}
+
+.accessibility-font-large .detail-item {
+  font-size: 1em;
+}
+
+.accessibility-font-extra-large .article-title {
+  font-size: 1.5em;
+}
+
+.accessibility-font-extra-large .article-summary {
+  font-size: 1.3em;
+}
+
+.accessibility-font-extra-large .detail-item {
+  font-size: 1.2em;
+}
+
+/* Touch target improvements */
+.accessibility-touch-large .bookmark-button {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+}
+
+.accessibility-touch-large .read-button {
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+}

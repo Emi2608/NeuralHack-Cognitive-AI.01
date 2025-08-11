@@ -1,0 +1,398 @@
+/* Accessibility Styles */
+
+/* High Contrast Mode */
+.high-contrast {
+  --ion-color-primary: #ffffff;
+  --ion-color-primary-rgb: 255, 255, 255;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #e0e0e0;
+  --ion-color-primary-tint: #ffffff;
+
+  --ion-color-secondary: #ffff00;
+  --ion-color-secondary-rgb: 255, 255, 0;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #e0e000;
+  --ion-color-secondary-tint: #ffff33;
+
+  --ion-color-tertiary: #00ffff;
+  --ion-color-tertiary-rgb: 0, 255, 255;
+  --ion-color-tertiary-contrast: #000000;
+  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+  --ion-color-tertiary-shade: #00e0e0;
+  --ion-color-tertiary-tint: #33ffff;
+
+  --ion-color-success: #00ff00;
+  --ion-color-success-rgb: 0, 255, 0;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #00e000;
+  --ion-color-success-tint: #33ff33;
+
+  --ion-color-warning: #ffff00;
+  --ion-color-warning-rgb: 255, 255, 0;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #e0e000;
+  --ion-color-warning-tint: #ffff33;
+
+  --ion-color-danger: #ff0000;
+  --ion-color-danger-rgb: 255, 0, 0;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #e00000;
+  --ion-color-danger-tint: #ff3333;
+
+  --ion-color-dark: #000000;
+  --ion-color-dark-rgb: 0, 0, 0;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #000000;
+  --ion-color-dark-tint: #1a1a1a;
+
+  --ion-color-medium: #808080;
+  --ion-color-medium-rgb: 128, 128, 128;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #707070;
+  --ion-color-medium-tint: #909090;
+
+  --ion-color-light: #ffffff;
+  --ion-color-light-rgb: 255, 255, 255;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #e0e0e0;
+  --ion-color-light-tint: #ffffff;
+
+  /* Background colors */
+  --ion-background-color: #000000;
+  --ion-background-color-rgb: 0, 0, 0;
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255, 255, 255;
+
+  /* Card and surface colors */
+  --ion-card-background: #1a1a1a;
+  --ion-item-background: #1a1a1a;
+}
+
+.high-contrast ion-button {
+  --border-width: 2px;
+  --border-style: solid;
+  --border-color: var(--ion-color-primary);
+}
+
+.high-contrast ion-input,
+.high-contrast ion-textarea,
+.high-contrast ion-select {
+  --border-width: 2px;
+  --border-style: solid;
+  --border-color: var(--ion-color-primary);
+}
+
+/* Font Size Variations */
+.font-normal {
+  --font-size-base: 16px;
+  --font-size-small: 14px;
+  --font-size-large: 18px;
+  --font-size-xlarge: 20px;
+}
+
+.font-large {
+  --font-size-base: 18px;
+  --font-size-small: 16px;
+  --font-size-large: 20px;
+  --font-size-xlarge: 24px;
+}
+
+.font-extra-large {
+  --font-size-base: 22px;
+  --font-size-small: 18px;
+  --font-size-large: 26px;
+  --font-size-xlarge: 30px;
+}
+
+/* Apply font sizes to elements */
+html {
+  font-size: var(--font-size-base);
+}
+
+h1 { font-size: var(--font-size-xlarge); }
+h2 { font-size: var(--font-size-large); }
+h3 { font-size: var(--font-size-base); }
+p, span, div { font-size: var(--font-size-base); }
+small { font-size: var(--font-size-small); }
+
+ion-button {
+  font-size: var(--font-size-base);
+}
+
+ion-input,
+ion-textarea,
+ion-select {
+  font-size: var(--font-size-base);
+}
+
+/* Large Touch Targets */
+.large-touch-targets ion-button {
+  --min-height: 48px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+.large-touch-targets ion-item {
+  --min-height: 56px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+}
+
+.large-touch-targets ion-checkbox,
+.large-touch-targets ion-radio {
+  --size: 24px;
+}
+
+.large-touch-targets ion-toggle {
+  --handle-width: 28px;
+  --handle-height: 28px;
+}
+
+/* Keyboard Navigation */
+.keyboard-navigation *:focus {
+  outline: 3px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+.keyboard-navigation ion-button:focus {
+  --box-shadow: 0 0 0 3px var(--ion-color-primary-tint);
+}
+
+.keyboard-navigation ion-input:focus,
+.keyboard-navigation ion-textarea:focus,
+.keyboard-navigation ion-select:focus {
+  --highlight-color: var(--ion-color-primary);
+  --highlight-height: 3px;
+}
+
+/* Skip Links */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  font-weight: bold;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Screen Reader Only Content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus Indicators for Custom Elements */
+[role="button"]:focus,
+[role="tab"]:focus,
+[role="menuitem"]:focus {
+  outline: 3px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High Contrast Media Query Support */
+@media (prefers-contrast: high) {
+  :root {
+    --ion-color-primary: #ffffff;
+    --ion-color-primary-contrast: #000000;
+    --ion-background-color: #000000;
+    --ion-text-color: #ffffff;
+  }
+}
+
+/* Color Blind Friendly Patterns */
+.pattern-dots {
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+.pattern-stripes {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    currentColor 2px,
+    currentColor 4px
+  );
+}
+
+.pattern-grid {
+  background-image: 
+    linear-gradient(currentColor 1px, transparent 1px),
+    linear-gradient(90deg, currentColor 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+/* Voice Guidance Indicators */
+.voice-guidance-active::after {
+  content: "🔊";
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Loading States with Accessibility */
+.accessible-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.accessible-loading ion-spinner {
+  margin-bottom: 16px;
+}
+
+.accessible-loading .loading-text {
+  font-size: var(--font-size-base);
+  text-align: center;
+  color: var(--ion-color-medium);
+}
+
+/* Error States with Accessibility */
+.accessible-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
+}
+
+.accessible-error ion-icon {
+  font-size: 48px;
+  color: var(--ion-color-danger);
+  margin-bottom: 16px;
+}
+
+.accessible-error .error-title {
+  font-size: var(--font-size-large);
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: var(--ion-color-danger);
+}
+
+.accessible-error .error-message {
+  font-size: var(--font-size-base);
+  color: var(--ion-color-medium);
+  margin-bottom: 16px;
+}
+
+/* Accessibility Settings Panel */
+.accessibility-panel {
+  padding: 16px;
+}
+
+.accessibility-panel ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+.accessibility-panel .setting-description {
+  font-size: var(--font-size-small);
+  color: var(--ion-color-medium);
+  margin-top: 4px;
+}
+
+/* Progress Indicators */
+.accessible-progress {
+  position: relative;
+  margin: 16px 0;
+}
+
+.accessible-progress .progress-text {
+  text-align: center;
+  margin-bottom: 8px;
+  font-size: var(--font-size-base);
+}
+
+.accessible-progress ion-progress-bar {
+  --progress-background: var(--ion-color-light);
+  --background: var(--ion-color-light-shade);
+}
+
+/* Tooltips and Help Text */
+.accessible-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.accessible-tooltip .tooltip-text {
+  visibility: hidden;
+  width: 200px;
+  background-color: var(--ion-color-dark);
+  color: var(--ion-color-dark-contrast);
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -100px;
+  font-size: var(--font-size-small);
+}
+
+.accessible-tooltip:hover .tooltip-text,
+.accessible-tooltip:focus .tooltip-text {
+  visibility: visible;
+}
+
+/* Form Validation Messages */
+.validation-message {
+  font-size: var(--font-size-small);
+  margin-top: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.validation-message.error {
+  color: var(--ion-color-danger);
+  background-color: var(--ion-color-danger-tint);
+  border: 1px solid var(--ion-color-danger);
+}
+
+.validation-message.success {
+  color: var(--ion-color-success);
+  background-color: var(--ion-color-success-tint);
+  border: 1px solid var(--ion-color-success);
+}

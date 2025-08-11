@@ -1,0 +1,156 @@
+.trend-chart {
+  background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+}
+
+.trend-chart .chart-container {
+  padding: 10px;
+}
+
+/* Trend indicators */
+.trend-indicators {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.trend-indicator {
+  text-align: center;
+  flex: 1;
+}
+
+.trend-indicator-icon {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.trend-indicator-label {
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
+  margin-bottom: 2px;
+}
+
+.trend-indicator-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+}
+
+.trend-indicator-value.improving {
+  color: #059669;
+}
+
+.trend-indicator-value.declining {
+  color: #dc2626;
+}
+
+.trend-indicator-value.stable {
+  color: #6b7280;
+}
+
+/* Risk zones overlay */
+.risk-zones {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.risk-zone {
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 0.1;
+  border-radius: 4px;
+}
+
+.risk-zone.low {
+  background: linear-gradient(to bottom, #10b981, transparent);
+}
+
+.risk-zone.moderate {
+  background: linear-gradient(to bottom, #f59e0b, transparent);
+}
+
+.risk-zone.high {
+  background: linear-gradient(to bottom, #ef4444, transparent);
+}
+
+/* Data points styling */
+.trend-chart canvas {
+  position: relative;
+  z-index: 2;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .trend-indicators {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .trend-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+  }
+  
+  .trend-indicator-icon {
+    margin-bottom: 0;
+    margin-right: 8px;
+  }
+  
+  .trend-indicator-content {
+    flex: 1;
+  }
+}
+
+/* Animation for line drawing */
+@keyframes drawLine {
+  from {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+  }
+}
+
+.trend-chart canvas {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Tooltip enhancements */
+.trend-chart .chartjs-tooltip {
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Legend styling */
+.trend-chart .chartjs-legend {
+  margin-bottom: 16px;
+}
+
+.trend-chart .chartjs-legend-item {
+  margin-right: 16px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .trend-chart {
+    border: 2px solid var(--ion-color-dark);
+  }
+  
+  .trend-indicators {
+    border: 1px solid var(--ion-color-dark);
+  }
+}
