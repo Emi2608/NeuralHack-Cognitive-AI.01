@@ -64,7 +64,7 @@ export const LoginPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent className="login-page">
+      <IonContent className="login-page" scrollY={false} fullscreen>
         <div className="login-container">
           {/* Header Section */}
           <div className="login-header">
