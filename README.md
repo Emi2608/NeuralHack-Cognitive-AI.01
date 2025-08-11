@@ -1,4 +1,4 @@
-![NeuralHack Logo](frontend/src/neuralhack.png)
+![NeuralHack Logo](neuralhack.png)
 # NeuralHack Cognitive AI Prototype
 
 ## Problem
