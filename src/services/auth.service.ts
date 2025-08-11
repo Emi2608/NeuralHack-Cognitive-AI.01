@@ -125,76 +125,133 @@ export class AuthService {
    * Sign in an existing user
    */
   static async signIn(data: SignInData): Promise<AuthResponse> {
-    const clientIP = await this.getClientIP();
+    console.log('🔐 AuthService.signIn called with email:', data.email);
     
-    // Validate login attempt (check for rate limiting)
-    if (!SecurityService.validateLoginAttempt(data.email, clientIP)) {
-      const error = new Error('Too many failed login attempts. Please try again later.');
-      
-      await AuditService.logSecurityEvent('login_blocked', {
-        email: data.email,
-        reason: 'rate_limit_exceeded',
-        ipAddress: clientIP
-      });
-      
-      return { user: null, session: null, error };
-    }
-
     try {
+      const clientIP = await this.getClientIP();
+      console.log('🌐 Client IP obtained:', clientIP);
+      
+      // Validate login attempt (check for rate limiting) - with timeout
+      let isRateLimited = false;
+      try {
+        isRateLimited = !SecurityService.validateLoginAttempt(data.email, clientIP);
+      } catch (securityError) {
+        console.warn('⚠️ Security validation failed (non-blocking):', securityError);
+        // Continue with login even if security check fails
+      }
+
+      if (isRateLimited) {
+        const error = new Error('Demasiados intentos de login. Intenta de nuevo más tarde.');
+        
+        // Log security event but don't let it block the response
+        try {
+          await Promise.race([
+            AuditService.logSecurityEvent('login_blocked', {
+              email: data.email,
+              reason: 'rate_limit_exceeded',
+              ipAddress: clientIP
+            }),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Audit timeout')), 2000))
+          ]);
+        } catch (auditError) {
+          console.warn('⚠️ Audit logging failed (non-blocking):', auditError);
+        }
+        
+        return { user: null, session: null, error };
+      }
+
+      console.log('🔐 Attempting Supabase authentication...');
       const { data: authData, error } = await supabase.auth.signInWithPassword({
         email: data.email,
         password: data.password,
       });
 
+      console.log('🔐 Supabase auth result:', { 
+        hasUser: !!authData.user, 
+        hasSession: !!authData.session, 
+        error: error?.message 
+      });
+
       if (error) {
-        // Record failed login attempt
-        SecurityService.recordFailedLogin(data.email, clientIP);
+        console.error('❌ Supabase auth error:', error);
         
-        await AuditService.logAuthEvent('login', undefined, {
-          email: data.email,
-          success: false,
-          error: error.message,
-          ipAddress: clientIP
-        });
+        // Record failed login attempt (non-blocking)
+        try {
+          SecurityService.recordFailedLogin(data.email, clientIP);
+          
+          await Promise.race([
+            AuditService.logAuthEvent('login', undefined, {
+              email: data.email,
+              success: false,
+              error: error.message,
+              ipAddress: clientIP
+            }),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Audit timeout')), 2000))
+          ]);
+        } catch (auditError) {
+          console.warn('⚠️ Failed login audit failed (non-blocking):', auditError);
+        }
         
         return { user: null, session: null, error };
       }
 
-      // Record successful login
+      // Record successful login (non-blocking)
       if (authData.user) {
-        SecurityService.recordSuccessfulLogin(authData.user.id, clientIP);
+        console.log('✅ Login successful, recording success...');
         
-        // Initialize secure storage with user session
-        if (authData.session?.access_token) {
-          await SecureStorage.initialize(authData.session.access_token);
+        try {
+          SecurityService.recordSuccessfulLogin(authData.user.id, clientIP);
+          
+          // Initialize secure storage with user session
+          if (authData.session?.access_token) {
+            await SecureStorage.initialize(authData.session.access_token);
+          }
+          
+          // Log success events with timeout
+          await Promise.race([
+            Promise.all([
+              AuditService.logAuthEvent('login', authData.user.id, {
+                email: data.email,
+                success: true,
+                ipAddress: clientIP
+              }),
+              this.logAuditEvent(authData.user.id, 'user_signed_in', {
+                email: data.email,
+              })
+            ]),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Audit timeout')), 3000))
+          ]);
+        } catch (auditError) {
+          console.warn('⚠️ Success audit logging failed (non-blocking):', auditError);
+          // Don't let audit failures block successful login
         }
-        
-        await AuditService.logAuthEvent('login', authData.user.id, {
-          email: data.email,
-          success: true,
-          ipAddress: clientIP
-        });
-
-        // Log the sign in for audit (legacy)
-        await this.logAuditEvent(authData.user.id, 'user_signed_in', {
-          email: data.email,
-        });
       }
 
+      console.log('✅ AuthService.signIn completed successfully');
       return {
         user: authData.user,
         session: authData.session,
         error: null,
       };
     } catch (error) {
-      // Record failed login attempt for unexpected errors
-      SecurityService.recordFailedLogin(data.email, clientIP);
+      console.error('❌ Unexpected error in AuthService.signIn:', error);
       
-      await AuditService.logSecurityEvent('login_error', {
-        email: data.email,
-        error: (error as Error).message,
-        ipAddress: clientIP
-      });
+      // Record failed login attempt for unexpected errors (non-blocking)
+      try {
+        const clientIP = await this.getClientIP();
+        SecurityService.recordFailedLogin(data.email, clientIP);
+        
+        await Promise.race([
+          AuditService.logSecurityEvent('login_error', {
+            email: data.email,
+            error: (error as Error).message,
+            ipAddress: clientIP
+          }),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Audit timeout')), 2000))
+        ]);
+      } catch (auditError) {
+        console.warn('⚠️ Error audit logging failed (non-blocking):', auditError);
+      }
       
       return {
         user: null,

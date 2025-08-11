@@ -22,6 +22,7 @@ export const useAuth = () => {
     
     // Don't fetch if we fetched recently (within 1 second)
     if (timeSinceLastFetch < 1000) {
+      console.log('⏭️ Skipping profile fetch - too recent');
       return null;
     }
 
@@ -30,15 +31,25 @@ export const useAuth = () => {
       clearTimeout(profileFetchTimeoutRef.current);
     }
 
-    return new Promise<UserProfile | null>((resolve) => {
+    return new Promise<UserProfile | null>((resolve, reject) => {
+      // Add a timeout to prevent hanging
+      const timeoutId = setTimeout(() => {
+        console.warn('⏰ Profile fetch timeout');
+        resolve(null);
+      }, 8000); // 8 second timeout
+
       profileFetchTimeoutRef.current = setTimeout(async () => {
         try {
+          console.log('📝 Fetching user profile...');
           lastProfileFetchRef.current = Date.now();
           const userProfile = await AuthService.getCurrentUserProfile();
+          clearTimeout(timeoutId);
+          console.log('✅ Profile fetched successfully');
           resolve(userProfile);
         } catch (error) {
-          console.error('Error fetching user profile:', error);
-          resolve(null);
+          console.error('❌ Error fetching user profile:', error);
+          clearTimeout(timeoutId);
+          resolve(null); // Don't reject, just return null
         }
       }, 300); // 300ms debounce
     });
@@ -228,29 +239,58 @@ export const useAuth = () => {
 
   // Sign in function
   const signIn = useCallback(async (data: SignInData) => {
+    console.log('🔐 Starting sign in process with data:', { email: data.email });
     setAuthState(prev => ({ ...prev, loading: true, error: null }));
 
     try {
-      const { user, session, error } = await AuthService.signIn(data);
+      const result = await AuthService.signIn(data);
+      console.log('🔐 AuthService.signIn result:', result);
 
-      if (error) {
-        throw error;
+      if (result.error) {
+        console.error('❌ Sign in error from service:', result.error);
+        setAuthState(prev => ({
+          ...prev,
+          loading: false,
+          error: result.error.message,
+        }));
+        return { success: false, error: result.error.message };
       }
 
-      if (user && session) {
-        const userProfile = await AuthService.getCurrentUserProfile();
+      if (result.user && result.session) {
+        console.log('✅ Sign in successful, user and session obtained');
+        
+        // Try to get user profile, but don't let it block the login
+        let userProfile = null;
+        try {
+          console.log('📝 Attempting to fetch user profile...');
+          userProfile = await AuthService.getCurrentUserProfile();
+          console.log('✅ Profile fetched:', userProfile ? 'Success' : 'No profile data');
+        } catch (profileError) {
+          console.warn('⚠️ Profile fetch failed (non-blocking):', profileError);
+          // Profile fetch failure shouldn't block login
+        }
+
         setAuthState({
           user: userProfile,
-          session,
+          session: result.session,
           loading: false,
           error: null,
         });
+
+        console.log('✅ Login completed successfully');
         return { success: true, error: null };
       } else {
-        throw new Error('Failed to sign in');
+        console.error('❌ No user or session in result:', result);
+        setAuthState(prev => ({
+          ...prev,
+          loading: false,
+          error: 'No se pudo obtener la sesión de usuario',
+        }));
+        return { success: false, error: 'No se pudo obtener la sesión de usuario' };
       }
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Sign in failed';
+      console.error('❌ Unexpected error during sign in:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Error inesperado durante el login';
       setAuthState(prev => ({
         ...prev,
         loading: false,

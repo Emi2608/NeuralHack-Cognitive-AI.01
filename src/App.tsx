@@ -29,6 +29,13 @@ import { ConsentPage } from './pages/auth/ConsentPage';
 import EmailConfirmationPage from './pages/auth/EmailConfirmationPage';
 import { DashboardPage } from './pages/dashboard/DashboardPage';
 
+// Assessment Pages
+import { MoCAPage } from './pages/assessments/MoCAPage';
+import { PHQ9Page } from './pages/assessments/PHQ9Page';
+import { MMSEPage } from './pages/assessments/MMSEPage';
+import { AD8Page } from './pages/assessments/AD8Page';
+import { ParkinsonsPage } from './pages/assessments/ParkinsonsPage';
+
 // Debug components
 import { AuthDebugger } from './components/debug/AuthDebugger';
 
@@ -50,6 +57,21 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/dashboard">
           <DashboardPage />
+        </Route>
+        <Route exact path="/assessments/moca">
+          <MoCAPage />
+        </Route>
+        <Route exact path="/assessments/phq9">
+          <PHQ9Page />
+        </Route>
+        <Route exact path="/assessments/mmse">
+          <MMSEPage />
+        </Route>
+        <Route exact path="/assessments/ad8">
+          <AD8Page />
+        </Route>
+        <Route exact path="/assessments/parkinsons">
+          <ParkinsonsPage />
         </Route>
         <Route exact path="/">
           <Redirect to="/login" />

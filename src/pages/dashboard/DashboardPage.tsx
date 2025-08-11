@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   IonContent,
   IonHeader,
@@ -29,10 +30,36 @@ import {
   medicalOutline,
 } from 'ionicons/icons';
 import { ResponsiveContainer } from '../../components/layout';
+import { ROUTES } from '../../constants/routes';
 import './DashboardPage.css';
 
 
 export const DashboardPage: React.FC = () => {
+  const history = useHistory();
+
+  const handleStartAssessment = (assessmentId: string) => {
+    // Navigate to the specific assessment
+    switch (assessmentId) {
+      case 'moca':
+        history.push(ROUTES.ASSESSMENT_MOCA);
+        break;
+      case 'phq9':
+        history.push(ROUTES.ASSESSMENT_PHQ9);
+        break;
+      case 'mmse':
+        history.push(ROUTES.ASSESSMENT_MMSE);
+        break;
+      case 'ad8':
+        history.push(ROUTES.ASSESSMENT_AD8);
+        break;
+      case 'parkinsons':
+        history.push(ROUTES.ASSESSMENT_PARKINSONS);
+        break;
+      default:
+        console.warn('Assessment not implemented:', assessmentId);
+    }
+  };
+
   const assessmentTypes = [
     {
       id: 'moca',
@@ -156,12 +183,12 @@ export const DashboardPage: React.FC = () => {
                           {assessment.description}
                         </p>
                         <IonButton
-                          fill="outline"
+                          fill="solid"
                           size="small"
                           color={assessment.color}
-                          disabled
+                          onClick={() => handleStartAssessment(assessment.id)}
                         >
-                          Próximamente
+                          Iniciar Evaluación
                         </IonButton>
                       </IonCardContent>
                     </IonCard>
