@@ -5,14 +5,13 @@ const CACHE_NAME = 'neuralhack-cognitive-ai-v1';
 const STATIC_CACHE_NAME = 'neuralhack-static-v1';
 const DYNAMIC_CACHE_NAME = 'neuralhack-dynamic-v1';
 
-// Resources to cache immediately
+// Resources to cache immediately (only essential files)
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/assets/index.css',
-  '/assets/index.js',
-  // Add other critical assets
+  '/icon.svg',
+  '/vite.svg'
 ];
 
 // Resources that should be cached dynamically
@@ -20,7 +19,8 @@ const DYNAMIC_CACHE_PATTERNS = [
   /^https:\/\/fonts\.googleapis\.com/,
   /^https:\/\/fonts\.gstatic\.com/,
   /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
-  /\.(?:js|css)$/,
+  /\/assets\/.*\.(?:js|css)$/,  // Vite generated assets with hashes
+  /\.(?:woff|woff2|ttf|eot)$/,  // Font files
 ];
 
 // Resources that should never be cached
@@ -36,16 +36,32 @@ self.addEventListener('install', (event) => {
   
   event.waitUntil(
     caches.open(STATIC_CACHE_NAME)
-      .then((cache) => {
+      .then(async (cache) => {
         console.log('Service Worker: Caching static assets');
-        return cache.addAll(STATIC_ASSETS);
-      })
-      .then(() => {
-        console.log('Service Worker: Static assets cached');
+        
+        // Cache assets one by one to avoid failing on missing files
+        const cachePromises = STATIC_ASSETS.map(async (asset) => {
+          try {
+            const response = await fetch(asset);
+            if (response.ok) {
+              await cache.put(asset, response);
+              console.log('Service Worker: Cached', asset);
+            } else {
+              console.warn('Service Worker: Failed to cache', asset, response.status);
+            }
+          } catch (error) {
+            console.warn('Service Worker: Error caching', asset, error);
+          }
+        });
+        
+        await Promise.allSettled(cachePromises);
+        console.log('Service Worker: Static assets caching completed');
         return self.skipWaiting();
       })
       .catch((error) => {
-        console.error('Service Worker: Error caching static assets:', error);
+        console.error('Service Worker: Error during installation:', error);
+        // Don't fail installation due to caching errors
+        return self.skipWaiting();
       })
   );
 });

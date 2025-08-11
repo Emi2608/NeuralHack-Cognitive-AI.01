@@ -49,11 +49,15 @@ export const useOffline = () => {
 
   // Register service worker
   const registerServiceWorker = useCallback(async () => {
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && import.meta.env.PROD) {
       try {
-        const registration = await navigator.serviceWorker.register('/sw.js');
-        setServiceWorkerRegistration(registration);
+        // Use simple service worker in production to avoid errors
+        const registration = await navigator.serviceWorker.register('/sw-simple.js', {
+          scope: '/',
+          updateViaCache: 'none'
+        });
         
+        setServiceWorkerRegistration(registration);
         console.log('Service Worker registered successfully:', registration);
 
         // Listen for service worker updates
@@ -62,7 +66,6 @@ export const useOffline = () => {
           if (newWorker) {
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                // New service worker is available
                 console.log('New service worker available');
                 // You could show a notification to the user here
               }
@@ -72,9 +75,13 @@ export const useOffline = () => {
 
         return registration;
       } catch (error) {
-        console.error('Service Worker registration failed:', error);
+        console.warn('Service Worker registration failed (non-critical):', error);
+        // Don't fail the app if SW registration fails
         return null;
       }
+    } else if (!import.meta.env.PROD) {
+      console.log('Service Worker disabled in development');
+      return null;
     } else {
       console.warn('Service Workers are not supported in this browser');
       return null;

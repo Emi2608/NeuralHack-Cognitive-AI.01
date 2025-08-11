@@ -109,7 +109,10 @@ describe('useOffline', () => {
       await result.current.registerServiceWorker();
     });
 
-    expect(navigator.serviceWorker.register).toHaveBeenCalledWith('/sw.js');
+    expect(navigator.serviceWorker.register).toHaveBeenCalledWith('/sw-simple.js', {
+      scope: '/',
+      updateViaCache: 'none'
+    });
     expect(result.current.serviceWorkerRegistration).toEqual(mockRegistration);
   });
 

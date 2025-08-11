@@ -61,18 +61,37 @@
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
     
-    <!-- Service Worker Registration - Temporarily disabled for debugging -->
+    <!-- Service Worker Cleanup and Registration -->
     <script>
-      // Service Worker temporarily disabled to debug asset loading issues
-      console.log('Service Worker registration disabled for debugging');
-      
-      // Clear any existing service worker
+      // Clean up old service workers and register new one
       if ('serviceWorker' in navigator) {
+        // First, unregister any existing service workers
         navigator.serviceWorker.getRegistrations().then(function(registrations) {
-          for(let registration of registrations) {
-            registration.unregister();
-            console.log('Unregistered service worker:', registration);
+          const unregisterPromises = registrations.map(registration => {
+            console.log('Unregistering old service worker:', registration.scope);
+            return registration.unregister();
+          });
+          
+          return Promise.all(unregisterPromises);
+        }).then(() => {
+          console.log('Old service workers cleaned up');
+          
+          // Only register in production
+          if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            // Register the new simple service worker
+            navigator.serviceWorker.register('/sw-simple.js', {
+              scope: '/',
+              updateViaCache: 'none'
+            }).then(function(registration) {
+              console.log('Simple Service Worker registered successfully:', registration);
+            }).catch(function(error) {
+              console.warn('Service Worker registration failed (non-critical):', error);
+            });
+          } else {
+            console.log('Service Worker disabled in development');
           }
+        }).catch(function(error) {
+          console.warn('Service Worker cleanup failed:', error);
         });
       }
     </script>
