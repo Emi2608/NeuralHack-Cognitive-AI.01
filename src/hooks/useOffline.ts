@@ -188,7 +188,10 @@ export const useOffline = () => {
   const requestBackgroundSync = useCallback(async () => {
     if (serviceWorkerRegistration && 'sync' in window.ServiceWorkerRegistration.prototype) {
       try {
-        await serviceWorkerRegistration.sync.register('background-sync');
+        // Background sync registration (if supported)
+        if ('sync' in serviceWorkerRegistration) {
+          await (serviceWorkerRegistration as any).sync.register('background-sync');
+        }
         console.log('Background sync registered');
         return true;
       } catch (error) {

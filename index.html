@@ -61,17 +61,18 @@
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
     
-    <!-- Service Worker Registration -->
+    <!-- Service Worker Registration - Temporarily disabled for debugging -->
     <script>
+      // Service Worker temporarily disabled to debug asset loading issues
+      console.log('Service Worker registration disabled for debugging');
+      
+      // Clear any existing service worker
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then((registration) => {
-              console.log('SW registered: ', registration);
-            })
-            .catch((registrationError) => {
-              console.log('SW registration failed: ', registrationError);
-            });
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for(let registration of registrations) {
+            registration.unregister();
+            console.log('Unregistered service worker:', registration);
+          }
         });
       }
     </script>

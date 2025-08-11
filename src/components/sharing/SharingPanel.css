@@ -1,0 +1,61 @@
+.sharing-panel {
+  margin: 16px 0;
+}
+
+.sharing-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.share-link-input {
+  font-size: 12px;
+  background-color: var(--ion-color-light);
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.sharing-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.sharing-buttons ion-button {
+  --border-radius: 8px;
+  height: 48px;
+}
+
+.sharing-info {
+  margin-top: 20px;
+  padding: 16px;
+  background-color: var(--ion-color-light);
+  border-radius: 8px;
+}
+
+.sharing-disclaimer {
+  font-size: 12px;
+  color: var(--ion-color-medium);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.sharing-expiry {
+  font-size: 11px;
+  color: var(--ion-color-medium-shade);
+  font-style: italic;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .sharing-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .sharing-buttons ion-button {
+    flex: 1;
+    min-width: 200px;
+  }
+}

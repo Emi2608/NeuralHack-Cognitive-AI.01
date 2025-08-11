@@ -28,6 +28,8 @@ import {
   documentTextOutline,
   medicalOutline,
 } from 'ionicons/icons';
+import { ResponsiveContainer } from '../../components/layout';
+import './DashboardPage.css';
 
 
 export const DashboardPage: React.FC = () => {
@@ -80,7 +82,7 @@ export const DashboardPage: React.FC = () => {
   ];
 
   return (
-    <IonPage>
+    <IonPage className="dashboard-page">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
@@ -90,8 +92,9 @@ export const DashboardPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
+        <ResponsiveContainer maxWidth="lg">
         {/* Welcome Section */}
-        <IonCard>
+        <IonCard className="welcome-section">
           <IonCardHeader>
             <IonCardTitle>¡Bienvenido a NeuralHack Cognitive AI!</IonCardTitle>
           </IonCardHeader>
@@ -126,7 +129,7 @@ export const DashboardPage: React.FC = () => {
             <IonCardTitle>Evaluaciones Disponibles</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            <IonGrid>
+            <IonGrid className="assessment-grid">
               <IonRow>
                 {assessmentTypes.map((assessment) => (
                   <IonCol size="12" sizeMd="6" key={assessment.id}>
@@ -170,7 +173,7 @@ export const DashboardPage: React.FC = () => {
         </IonCard>
 
         {/* Development Status */}
-        <IonCard>
+        <IonCard className="status-section">
           <IonCardHeader>
             <IonCardTitle>Estado del Desarrollo</IonCardTitle>
           </IonCardHeader>
@@ -217,11 +220,10 @@ export const DashboardPage: React.FC = () => {
         </IonCard>
 
         {/* Export and Sharing Section */}
-        <ExportPanel />
-        <SharingPanel assessmentIds={[]} />
+        {/* Export and sharing panels will be added here */}
 
         {/* Accessibility Note */}
-        <IonCard>
+        <IonCard className="accessibility-note">
           <IonCardContent>
             <p style={{ textAlign: 'center', margin: 0 }}>
               <strong>💡 Consejo:</strong> Use el botón de accesibilidad (♿) en la esquina 
@@ -229,6 +231,7 @@ export const DashboardPage: React.FC = () => {
             </p>
           </IonCardContent>
         </IonCard>
+        </ResponsiveContainer>
       </IonContent>
     </IonPage>
   );

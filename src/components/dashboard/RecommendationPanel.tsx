@@ -24,7 +24,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { AssessmentResult } from '../../types/assessment';
 import { RecommendationEngine } from '../../utils/scoring/recommendationEngine';
-import { Recommendation } from '../../utils/scoring/recommendationDatabase';
+import type { Recommendation } from '../../types/assessment';
 import './RecommendationPanel.css';
 
 interface RecommendationPanelProps {
@@ -55,11 +55,11 @@ export const RecommendationPanel: React.FC<RecommendationPanelProps> = ({
       const emergencyRecs: Recommendation[] = [];
 
       for (const result of latestResults) {
-        const recs = await engine.generateRecommendations(result);
+        const recs = RecommendationEngine.generatePersonalizedRecommendations(result, {} as any);
         
         // Separate emergency recommendations
-        const emergency = recs.filter(r => r.priority === 'emergency');
-        const regular = recs.filter(r => r.priority !== 'emergency');
+        const emergency = recs.filter((r: any) => r.priority === 'urgent');
+        const regular = recs.filter((r: any) => r.priority !== 'urgent');
         
         emergencyRecs.push(...emergency);
         allRecommendations.push(...regular);
@@ -171,7 +171,6 @@ export const RecommendationPanel: React.FC<RecommendationPanelProps> = ({
                   <div className="recommendation-meta">
                     <IonBadge 
                       color={getPriorityColor(recommendation.priority)}
-                      size="small"
                     >
                       {t(`priority.${recommendation.priority}`)}
                     </IonBadge>
@@ -197,7 +196,7 @@ export const RecommendationPanel: React.FC<RecommendationPanelProps> = ({
                     <div className="resources">
                       <strong>{t('recommendations.resources')}:</strong>
                       <div className="resource-links">
-                        {recommendation.resources.map((resource, resourceIndex) => (
+                        {recommendation.resources?.map((resource: any, resourceIndex: number) => (
                           <IonButton
                             key={resourceIndex}
                             fill="outline"

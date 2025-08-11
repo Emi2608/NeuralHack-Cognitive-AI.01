@@ -35,12 +35,21 @@ export class AuthService {
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: data.email,
         password: data.password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/confirm`,
+          data: {
+            email: data.email,
+            language: data.language
+          }
+        }
       });
 
       if (authError) {
         return { user: null, session: null, error: authError };
       }
 
+      // When email confirmation is enabled, user is created but session is null
+      // This is expected behavior - user needs to confirm email first
       if (!authData.user) {
         return {
           user: null,
@@ -49,7 +58,7 @@ export class AuthService {
         };
       }
 
-      // Create user profile
+      // Create user profile data (we'll store it even if email isn't confirmed yet)
       const defaultAccessibilitySettings: AccessibilitySettings = {
         highContrast: false,
         fontSize: 'normal',
@@ -69,14 +78,27 @@ export class AuthService {
         consent_date: new Date().toISOString(),
       };
 
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .insert([profileData]);
+      // Try to create the profile - this might fail if email confirmation is required
+      // and the user doesn't exist in the profiles table yet
+      try {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .insert([profileData]);
 
-      if (profileError) {
-        // If profile creation fails, we should clean up the auth user
-        await supabase.auth.signOut();
-        return { user: null, session: null, error: profileError };
+        if (profileError && !profileError.message.includes('duplicate key')) {
+          console.warn('Profile creation failed, will retry after email confirmation:', profileError);
+        }
+      } catch (profileError) {
+        console.warn('Profile creation failed, will retry after email confirmation:', profileError);
+      }
+
+      // If email confirmation is required, return success without session
+      if (!authData.session && authData.user && !authData.user.email_confirmed_at) {
+        return {
+          user: authData.user,
+          session: null,
+          error: null // This is not an error - user needs to confirm email
+        };
       }
 
       // Log the registration for audit
@@ -244,29 +266,77 @@ export class AuthService {
         .from('profiles')
         .select('*')
         .eq('id', session.user.id)
-        .single();
+        .maybeSingle();
 
       if (error) {
         console.error('Error fetching user profile:', error);
+        
+        // If profile doesn't exist, try to create it using the complete registration function
+        if (error.code === 'PGRST116' || error.message.includes('No rows found')) {
+          console.log('Profile not found, attempting to create it...');
+          try {
+            const { error: createError } = await this.completeProfileAfterConfirmation(
+              session.user.id,
+              session.user.email || '',
+              undefined,
+              undefined,
+              'es'
+            );
+            
+            if (!createError) {
+              // Retry fetching the profile
+              const { data: retryData, error: retryError } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('id', session.user.id)
+                .maybeSingle();
+                
+              if (!retryError && retryData) {
+                return this.mapProfileData(retryData);
+              }
+            }
+          } catch (createError) {
+            console.error('Failed to create profile:', createError);
+          }
+        }
+        
         return null;
       }
 
-      return {
-        id: data.id,
-        email: data.email,
-        dateOfBirth: new Date(data.date_of_birth),
-        educationLevel: data.education_level,
-        language: data.language,
-        accessibilitySettings: data.accessibility_settings,
-        consentGiven: data.consent_given,
-        consentDate: new Date(data.consent_date),
-        createdAt: new Date(data.created_at),
-        updatedAt: new Date(data.updated_at),
-      };
+      if (!data) {
+        console.log('No profile data found for user');
+        return null;
+      }
+
+      return this.mapProfileData(data);
     } catch (error) {
       console.error('Error getting user profile:', error);
       return null;
     }
+  }
+
+  /**
+   * Map database profile data to UserProfile type
+   */
+  private static mapProfileData(data: any): UserProfile {
+    return {
+      id: data.id,
+      email: data.email,
+      dateOfBirth: data.date_of_birth ? new Date(data.date_of_birth) : new Date(),
+      educationLevel: data.education_level || 0,
+      language: data.language || 'es',
+      accessibilitySettings: data.accessibility_settings || {
+        highContrast: false,
+        fontSize: 'normal',
+        voiceGuidance: false,
+        keyboardNavigation: false,
+        touchTargetSize: 'normal',
+      },
+      consentGiven: data.consent_given || false,
+      consentDate: data.consent_date ? new Date(data.consent_date) : new Date(),
+      createdAt: data.created_at ? new Date(data.created_at) : new Date(),
+      updatedAt: data.updated_at ? new Date(data.updated_at) : new Date(),
+    };
   }
 
   /**
@@ -384,20 +454,68 @@ export class AuthService {
     metadata: Record<string, any>
   ): Promise<void> {
     try {
-      await supabase.from('audit_logs').insert([
+      // Add a small delay and unique identifier to prevent duplicate entries
+      const uniqueMetadata = {
+        ...metadata,
+        timestamp: new Date().toISOString(),
+        client_id: `${userId}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+      };
+
+      const { error } = await supabase.from('audit_logs').insert([
         {
           user_id: userId,
           action,
           resource_type: 'user',
           resource_id: userId,
-          metadata,
+          metadata: uniqueMetadata,
           ip_address: null, // Will be handled by Supabase
           user_agent: navigator.userAgent,
         },
       ]);
+
+      if (error) {
+        console.warn('Audit log insert failed:', error);
+        // Store in local storage as fallback
+        this.storeAuditEventLocally(userId, action, uniqueMetadata);
+      }
     } catch (error) {
       console.error('Failed to log audit event:', error);
-      // Don't throw error as audit logging shouldn't break the main flow
+      // Store in local storage as fallback
+      this.storeAuditEventLocally(userId, action, metadata);
+    }
+  }
+
+  /**
+   * Store audit event locally as fallback
+   */
+  private static storeAuditEventLocally(
+    userId: string,
+    action: string,
+    metadata: Record<string, any>
+  ): void {
+    try {
+      const auditEvent = {
+        user_id: userId,
+        action,
+        resource_type: 'user',
+        resource_id: userId,
+        metadata,
+        timestamp: new Date().toISOString(),
+        user_agent: navigator.userAgent,
+      };
+
+      const existingEvents = localStorage.getItem('pending_audit_events');
+      const events = existingEvents ? JSON.parse(existingEvents) : [];
+      events.push(auditEvent);
+
+      // Keep only last 100 events in local storage
+      if (events.length > 100) {
+        events.splice(0, events.length - 100);
+      }
+
+      localStorage.setItem('pending_audit_events', JSON.stringify(events));
+    } catch (error) {
+      console.error('Failed to store audit event locally:', error);
     }
   }
 
@@ -455,6 +573,81 @@ export class AuthService {
     }
 
     return age;
+  }
+
+  /**
+   * Complete user profile after email confirmation using database function
+   */
+  static async completeProfileAfterConfirmation(
+    userId: string, 
+    email: string,
+    dateOfBirth?: Date,
+    educationLevel?: number,
+    language: string = 'es'
+  ): Promise<{ error: Error | null; success: boolean }> {
+    try {
+      const { data, error } = await supabase.rpc('complete_user_registration', {
+        user_id: userId,
+        user_email: email,
+        date_of_birth: dateOfBirth?.toISOString().split('T')[0] || null,
+        education_level: educationLevel || null,
+        language_pref: language
+      });
+
+      if (error) {
+        return { error, success: false };
+      }
+
+      return { 
+        error: null, 
+        success: data?.success || false 
+      };
+    } catch (error) {
+      return { error: error as Error, success: false };
+    }
+  }
+
+  /**
+   * Check user confirmation status
+   */
+  static async checkConfirmationStatus(email: string): Promise<{
+    exists: boolean;
+    confirmed: boolean;
+    profileExists: boolean;
+    message: string;
+    error: Error | null;
+  }> {
+    try {
+      const { data, error } = await supabase.rpc('check_user_confirmation_status', {
+        user_email: email
+      });
+
+      if (error) {
+        return {
+          exists: false,
+          confirmed: false,
+          profileExists: false,
+          message: 'Error al verificar estado',
+          error
+        };
+      }
+
+      return {
+        exists: data?.exists || false,
+        confirmed: data?.confirmed || false,
+        profileExists: data?.profile_exists || false,
+        message: data?.message || 'Estado desconocido',
+        error: null
+      };
+    } catch (error) {
+      return {
+        exists: false,
+        confirmed: false,
+        profileExists: false,
+        message: 'Error inesperado',
+        error: error as Error
+      };
+    }
   }
 
   /**

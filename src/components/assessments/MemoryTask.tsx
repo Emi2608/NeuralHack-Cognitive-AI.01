@@ -199,7 +199,7 @@ export const MemoryTask: React.FC<MemoryTaskProps> = ({
           />
 
           <div className="words-display">
-            {config.words.map((word, index) => (
+            {config.words.map((word: string, index: number) => (
               <div key={index} className="memory-word">
                 {word}
               </div>

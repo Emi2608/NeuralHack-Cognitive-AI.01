@@ -114,6 +114,8 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
     return age;
   };
 
+  const [successMessage, setSuccessMessage] = useState('');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -124,7 +126,15 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
     const result = await signUp(formData);
 
     if (result.success) {
-      onSuccess?.();
+      if ((result as any).requiresEmailConfirmation) {
+        setSuccessMessage((result as any).message || 'Se ha enviado un email de confirmación. Por favor, revisa tu bandeja de entrada.');
+        // Don't call onSuccess immediately - wait for user to see the message
+        setTimeout(() => {
+          onSuccess?.();
+        }, 5000);
+      } else {
+        onSuccess?.();
+      }
     }
   };
 
@@ -246,8 +256,15 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             </div>
           )}
 
+          {/* Success Message */}
+          {successMessage && (
+            <IonText color="success">
+              <p className="ion-margin-top">{successMessage}</p>
+            </IonText>
+          )}
+
           {/* API Error */}
-          {error && (
+          {error && !successMessage && (
             <IonText color="danger">
               <p className="ion-margin-top">{error}</p>
             </IonText>

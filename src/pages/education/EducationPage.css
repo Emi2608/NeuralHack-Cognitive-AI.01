@@ -1,5 +1,28 @@
-.education-content {
+/* Education Page Styles */
+.education-page .education-content {
   padding: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Responsive content container */
+@media (min-width: 768px) {
+  .education-page .education-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .education-page .education-content {
+    max-width: 1400px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .education-page .education-content {
+    max-width: 1200px;
+  }
 }
 
 .loading-container {

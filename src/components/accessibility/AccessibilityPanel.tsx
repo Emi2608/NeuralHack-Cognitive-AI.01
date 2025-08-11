@@ -63,7 +63,7 @@ export const AccessibilityPanel: React.FC<AccessibilityPanelProps> = ({
           </IonLabel>
           <IonToggle
             checked={settings.highContrast}
-            onIonToggle={toggleHighContrast}
+            onIonChange={toggleHighContrast}
             aria-label="Activar modo de alto contraste"
           />
         </IonItem>
@@ -79,7 +79,7 @@ export const AccessibilityPanel: React.FC<AccessibilityPanelProps> = ({
           </IonLabel>
           <IonSelect
             value={settings.fontSize}
-            onSelectionChange={(e) => setFontSize(e.detail.value)}
+            onIonChange={(e: any) => setFontSize(e.detail.value)}
             interface="popover"
             aria-label="Seleccionar tamaño de fuente"
           >
@@ -103,7 +103,7 @@ export const AccessibilityPanel: React.FC<AccessibilityPanelProps> = ({
           <IonToggle
             checked={settings.voiceGuidance}
             disabled={!isVoiceSupported}
-            onIonToggle={toggleVoiceGuidance}
+            onIonChange={toggleVoiceGuidance}
             aria-label="Activar guía de voz"
           />
         </IonItem>
@@ -145,7 +145,7 @@ export const AccessibilityPanel: React.FC<AccessibilityPanelProps> = ({
           </IonLabel>
           <IonSelect
             value={settings.touchTargetSize}
-            onSelectionChange={(e) => setTouchTargetSize(e.detail.value)}
+            onIonChange={(e: any) => setTouchTargetSize(e.detail.value)}
             interface="popover"
             aria-label="Seleccionar tamaño de botones"
           >

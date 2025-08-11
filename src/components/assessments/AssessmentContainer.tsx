@@ -309,7 +309,7 @@ export const AssessmentContainer: React.FC<AssessmentContainerProps> = ({
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            <p>{error.message}</p>
+            <p>{typeof error === 'string' ? error : (error as any)?.message || 'Error desconocido'}</p>
             <IonButton fill="clear" onClick={onExit}>
               {t('common.goBack')}
             </IonButton>

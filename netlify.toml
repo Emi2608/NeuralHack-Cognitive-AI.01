@@ -5,10 +5,7 @@
 [build.environment]
   NODE_VERSION = "18"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# This will be handled by _redirects file
 
 [[headers]]
   for = "/manifest.json"
@@ -20,6 +17,26 @@
   [headers.values]
     Content-Type = "application/javascript"
     Service-Worker-Allowed = "/"
+
+[[headers]]
+  for = "/assets/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
+
+[[headers]]
+  for = "/assets/*.css"
+  [headers.values]
+    Content-Type = "text/css"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Content-Type = "text/css"
 
 [[headers]]
   for = "/*"

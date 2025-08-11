@@ -177,11 +177,23 @@ export const MoCAAssessment: React.FC<MoCAAssessmentProps> = ({
     };
 
     const result: MoCAResult = {
+      id: 'moca-' + Date.now(),
       sessionId: 'moca-' + Date.now(),
       testType: 'moca',
+      totalScore: adjustedScore,
+      maxScore: 30,
       rawScore,
       adjustedScore,
-      sectionScores,
+      sectionScores: Object.entries(sectionScores).map(([key, value]) => ({
+        sectionId: key,
+        name: key.charAt(0).toUpperCase() + key.slice(1),
+        score: value,
+        maxScore: 5, // Default max score, adjust as needed
+        items: []
+      })),
+      mocaSectionScores: sectionScores,
+      responses: [],
+      completedAt: new Date().toISOString(),
       educationAdjustment: adjustedScore - rawScore,
       riskAssessment: {
         testType: 'moca',
@@ -196,11 +208,16 @@ export const MoCAAssessment: React.FC<MoCAAssessmentProps> = ({
       },
       recommendations: riskRange.recommendations.map((rec, index) => ({
         id: `moca-rec-${index}`,
-        type: 'medical',
-        category: 'immediate',
+        testType: 'moca' as const,
+        riskLevel: riskRange.category,
+        type: 'medical' as const,
+        category: 'immediate' as const,
         title: rec,
         description: rec,
-        priority: riskRange.category === 'high' ? 'urgent' : 'medium'
+        priority: riskRange.category === 'high' ? 'urgent' as const : 'medium' as const,
+        actionSteps: ['Consultar con profesional de salud'],
+        followUpDays: 30,
+        metadata: {}
       })),
       completionTime: Date.now() - startTime,
       metadata: {

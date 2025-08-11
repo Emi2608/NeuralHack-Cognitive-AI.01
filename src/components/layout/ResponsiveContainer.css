@@ -1,0 +1,105 @@
+/* Responsive Container Component */
+
+.responsive-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Small container - for forms and narrow content */
+.responsive-container-sm {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .responsive-container-sm {
+    max-width: 600px;
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container-sm {
+    max-width: 700px;
+  }
+}
+
+/* Medium container - for profiles and settings */
+.responsive-container-md {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .responsive-container-md {
+    max-width: 800px;
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container-md {
+    max-width: 900px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .responsive-container-md {
+    max-width: 800px;
+  }
+}
+
+/* Large container - for dashboards and main content */
+.responsive-container-lg {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .responsive-container-lg {
+    max-width: 1000px;
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container-lg {
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .responsive-container-lg {
+    max-width: 1000px;
+  }
+}
+
+/* Extra large container - for wide content like education */
+.responsive-container-xl {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .responsive-container-xl {
+    max-width: 1200px;
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container-xl {
+    max-width: 1400px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .responsive-container-xl {
+    max-width: 1200px;
+  }
+}
+
+/* Remove padding on mobile for full-width content */
+@media (max-width: 767px) {
+  .responsive-container-full-mobile {
+    padding: 0;
+  }
+}

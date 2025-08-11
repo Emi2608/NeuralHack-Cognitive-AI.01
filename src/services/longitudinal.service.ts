@@ -249,7 +249,8 @@ export class LongitudinalService {
         assessmentsByType[assessment.testType] = 
           (assessmentsByType[assessment.testType] || 0) + 1;
         
-        riskProgression[assessment.riskCategory]++;
+        const riskCategory = assessment.riskAssessment?.riskCategory || 'low';
+        riskProgression[riskCategory as keyof typeof riskProgression]++;
       });
 
       // Calculate average interval between assessments

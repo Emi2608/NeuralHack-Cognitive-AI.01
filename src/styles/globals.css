@@ -147,6 +147,39 @@ body {
   --ion-color-step-950: #0d0d0d;
 }
 
+/* Layout utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.container-sm {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.container-lg {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Responsive content centering */
+@media (min-width: 768px) {
+  .responsive-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-content {
+    max-width: 1000px;
+  }
+}
+
 /* Utility classes */
 .text-center {
   text-align: center;

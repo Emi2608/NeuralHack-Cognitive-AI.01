@@ -121,7 +121,7 @@ export const DataExportPanel: React.FC = () => {
               <IonLabel>{t('gdpr.export.format')}</IonLabel>
               <IonSelect
                 value={format}
-                onSelectionChange={(e) => setFormat(e.detail.value)}
+                onIonChange={(e: any) => setFormat(e.detail.value)}
                 disabled={exporting}
               >
                 <IonSelectOption value="json">JSON</IonSelectOption>

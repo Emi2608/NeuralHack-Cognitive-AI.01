@@ -124,10 +124,16 @@ export const PHQ9Assessment: React.FC<PHQ9AssessmentProps> = ({
     const suicidalIdeation = (responses['phq9_q9'] || 0) > 0;
 
     const result: PHQ9Result = {
+      id: 'phq9-' + Date.now(),
       sessionId: 'phq9-' + Date.now(),
       testType: 'phq9',
+      totalScore: rawScore,
+      maxScore: 27,
       rawScore,
       adjustedScore: rawScore, // PHQ-9 doesn't have adjustments
+      sectionScores: [],
+      responses: [],
+      completedAt: new Date().toISOString(),
       severityLevel,
       suicidalIdeation,
       functionalImpairment,
@@ -157,11 +163,16 @@ export const PHQ9Assessment: React.FC<PHQ9AssessmentProps> = ({
       },
       recommendations: riskRange.recommendations.map((rec, index) => ({
         id: `phq9-rec-${index}`,
-        type: suicidalIdeation ? 'medical' : 'lifestyle',
-        category: suicidalIdeation ? 'immediate' : severityLevel === 'severe' ? 'immediate' : 'short_term',
+        testType: 'phq9' as const,
+        riskLevel: riskRange.category,
+        type: suicidalIdeation ? 'medical' as const : 'lifestyle' as const,
+        category: suicidalIdeation ? 'immediate' as const : (severityLevel === 'severe' ? 'immediate' as const : 'short_term' as const),
         title: rec,
         description: rec,
-        priority: suicidalIdeation ? 'urgent' : severityLevel === 'severe' ? 'high' : 'medium'
+        priority: suicidalIdeation ? 'urgent' as const : (severityLevel === 'severe' ? 'high' as const : 'medium' as const),
+        actionSteps: suicidalIdeation ? ['Buscar ayuda inmediata', 'Contactar línea de crisis'] : ['Consultar profesional'],
+        followUpDays: suicidalIdeation ? 1 : 14,
+        metadata: {}
       })),
       completionTime: Date.now() - startTime,
       metadata: {

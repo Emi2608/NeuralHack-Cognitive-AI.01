@@ -84,7 +84,7 @@ export class EducationService {
 
       // Analyze assessment results and generate recommendations
       for (const result of assessmentResults) {
-        const riskLevel = result.riskCategory;
+        const riskLevel = result.riskAssessment?.riskCategory || 'low';
         const testType = result.testType;
 
         if (riskLevel === 'high') {

@@ -68,7 +68,9 @@ export const ParkinsonsAssessment: React.FC<ParkinsonsAssessmentProps> = ({
 
   const handleNext = () => {
     if (currentResponse !== null) {
-      submitResponse(currentQuestion.id, currentResponse);
+      if (currentQuestion) {
+        submitResponse(currentQuestion.id, currentResponse);
+      }
       setCurrentResponse(null);
     }
     nextQuestion();
@@ -88,7 +90,7 @@ export const ParkinsonsAssessment: React.FC<ParkinsonsAssessmentProps> = ({
   const getSectionProgress = () => {
     const sectionQuestions = parkinsonsDefinition.sections
       .find(s => s.id === currentSection?.id)?.questions || [];
-    const currentQuestionIndex = sectionQuestions.findIndex(q => q.id === currentQuestion.id);
+    const currentQuestionIndex = currentQuestion ? sectionQuestions.findIndex(q => q.id === currentQuestion.id) : -1;
     return {
       current: currentQuestionIndex + 1,
       total: sectionQuestions.length
@@ -100,7 +102,7 @@ export const ParkinsonsAssessment: React.FC<ParkinsonsAssessmentProps> = ({
       case 'motor_symptoms':
         return body;
       case 'non_motor_symptoms':
-        return brain;
+        return medicalOutline;
       case 'daily_activities':
         return home;
       default:
@@ -154,7 +156,7 @@ export const ParkinsonsAssessment: React.FC<ParkinsonsAssessmentProps> = ({
                       <p>Temblor, rigidez, lentitud de movimientos, problemas de equilibrio</p>
                     </div>
                     <div className="section-card non-motor">
-                      <IonIcon icon={brain} />
+                      <IonIcon icon={medicalOutline} />
                       <h5>Síntomas No Motores</h5>
                       <p>Olfato, sueño, estreñimiento, cambios de ánimo</p>
                     </div>
@@ -256,7 +258,7 @@ export const ParkinsonsAssessment: React.FC<ParkinsonsAssessmentProps> = ({
               {formatTime(timeRemaining)}
             </div>
           </div>
-          <IonProgressBar value={progress} />
+          <IonProgressBar value={typeof progress === 'number' ? progress : 0} />
         </div>
 
         {/* Current section info */}
@@ -287,10 +289,10 @@ export const ParkinsonsAssessment: React.FC<ParkinsonsAssessmentProps> = ({
           <IonCard className="question-card">
             <IonCardContent>
               <div className="question-header">
-                <h3>{currentQuestion.text}</h3>
-                {currentQuestion.instructions && (
+                <h3>{currentQuestion?.text || 'Cargando pregunta...'}</h3>
+                {currentQuestion?.instructions && (
                   <IonText color="medium">
-                    <p className="question-instructions">{currentQuestion.instructions}</p>
+                    <p className="question-instructions">{currentQuestion?.instructions}</p>
                   </IonText>
                 )}
               </div>
@@ -300,7 +302,7 @@ export const ParkinsonsAssessment: React.FC<ParkinsonsAssessmentProps> = ({
                   value={currentResponse}
                   onIonChange={(e) => handleResponseChange(e.detail.value)}
                 >
-                  {currentQuestion.options?.map((option) => (
+                  {currentQuestion?.options?.map((option) => (
                     <IonItem key={option.value} className="option-item">
                       <IonLabel className="option-label">
                         {option.label}
@@ -337,7 +339,7 @@ export const ParkinsonsAssessment: React.FC<ParkinsonsAssessmentProps> = ({
             onClick={handleNext}
             disabled={currentResponse === null}
           >
-            {progress === 1 ? 'Finalizar' : 'Siguiente'}
+            {progress && typeof progress === 'number' && progress >= 1 ? 'Finalizar' : 'Siguiente'}
           </IonButton>
         </div>
 

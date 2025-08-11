@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { AuthService, type SignUpData, type SignInData } from '../services/service.factory';
 import type { UserProfile, AuthState } from '../types/user';
 
@@ -11,6 +11,39 @@ export const useAuth = () => {
     error: null,
   });
 
+  // Add debounce mechanism to prevent rapid profile fetching
+  const profileFetchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastProfileFetchRef = useRef<number>(0);
+
+  // Debounced profile fetching function
+  const fetchUserProfileDebounced = useCallback(async (session: any) => {
+    const now = Date.now();
+    const timeSinceLastFetch = now - lastProfileFetchRef.current;
+    
+    // Don't fetch if we fetched recently (within 1 second)
+    if (timeSinceLastFetch < 1000) {
+      return null;
+    }
+
+    // Clear any pending timeout
+    if (profileFetchTimeoutRef.current) {
+      clearTimeout(profileFetchTimeoutRef.current);
+    }
+
+    return new Promise<UserProfile | null>((resolve) => {
+      profileFetchTimeoutRef.current = setTimeout(async () => {
+        try {
+          lastProfileFetchRef.current = Date.now();
+          const userProfile = await AuthService.getCurrentUserProfile();
+          resolve(userProfile);
+        } catch (error) {
+          console.error('Error fetching user profile:', error);
+          resolve(null);
+        }
+      }, 300); // 300ms debounce
+    });
+  }, []);
+
   // Initialize auth state
   useEffect(() => {
     let mounted = true;
@@ -21,7 +54,7 @@ export const useAuth = () => {
         let userProfile: UserProfile | null = null;
 
         if (session?.user) {
-          userProfile = await AuthService.getCurrentUserProfile();
+          userProfile = await fetchUserProfileDebounced(session);
         }
 
         if (mounted) {
@@ -54,13 +87,24 @@ export const useAuth = () => {
         console.log('Auth state changed:', event, session);
 
         if (event === 'SIGNED_IN' && session?.user) {
-          const userProfile = await AuthService.getCurrentUserProfile();
-          setAuthState({
-            user: userProfile,
-            session,
-            loading: false,
-            error: null,
-          });
+          try {
+            const userProfile = await fetchUserProfileDebounced(session);
+            setAuthState({
+              user: userProfile,
+              session,
+              loading: false,
+              error: null,
+            });
+          } catch (error) {
+            console.error('Error loading user profile after sign in:', error);
+            // Still set the session even if profile loading fails
+            setAuthState({
+              user: null,
+              session,
+              loading: false,
+              error: 'Failed to load user profile',
+            });
+          }
         } else if (event === 'SIGNED_OUT') {
           setAuthState({
             user: null,
@@ -74,6 +118,34 @@ export const useAuth = () => {
             session,
             error: null,
           }));
+        } else if (event === 'INITIAL_SESSION') {
+          // Handle initial session load
+          if (session?.user) {
+            try {
+              const userProfile = await fetchUserProfileDebounced(session);
+              setAuthState({
+                user: userProfile,
+                session,
+                loading: false,
+                error: null,
+              });
+            } catch (error) {
+              console.error('Error loading user profile on initial session:', error);
+              setAuthState({
+                user: null,
+                session,
+                loading: false,
+                error: 'Failed to load user profile',
+              });
+            }
+          } else {
+            setAuthState({
+              user: null,
+              session: null,
+              loading: false,
+              error: null,
+            });
+          }
         }
       }
     );
@@ -81,6 +153,11 @@ export const useAuth = () => {
     return () => {
       mounted = false;
       subscription.unsubscribe();
+      
+      // Clear any pending profile fetch timeout
+      if (profileFetchTimeoutRef.current) {
+        clearTimeout(profileFetchTimeoutRef.current);
+      }
     };
   }, []);
 
@@ -101,17 +178,42 @@ export const useAuth = () => {
         throw error;
       }
 
-      if (user && session) {
-        const userProfile = await AuthService.getCurrentUserProfile();
-        setAuthState({
-          user: userProfile,
-          session,
-          loading: false,
-          error: null,
-        });
+      if (user) {
+        // If session is null but user exists, it means email confirmation is required
+        if (!session && !user.email_confirmed_at) {
+          setAuthState(prev => ({
+            ...prev,
+            loading: false,
+            error: null,
+          }));
+          return { 
+            success: true, 
+            error: null, 
+            requiresEmailConfirmation: true,
+            message: 'Se ha enviado un email de confirmación. Por favor, revisa tu bandeja de entrada.'
+          };
+        }
+
+        // If we have both user and session, get the profile
+        if (session) {
+          const userProfile = await AuthService.getCurrentUserProfile();
+          setAuthState({
+            user: userProfile,
+            session,
+            loading: false,
+            error: null,
+          });
+        } else {
+          setAuthState(prev => ({
+            ...prev,
+            loading: false,
+            error: null,
+          }));
+        }
+        
         return { success: true, error: null };
       } else {
-        throw new Error('Failed to create user account');
+        throw new Error('No se pudo crear la cuenta de usuario');
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Sign up failed';

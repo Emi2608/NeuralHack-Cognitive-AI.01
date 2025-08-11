@@ -12,6 +12,133 @@ import type {
 import { getTestDefinition } from '../../constants/testDefinitions';
 import { RiskCalculator } from './riskCalculator';
 
+/**
+ * Calculate MoCA score with section breakdown
+ */
+export function scoreMoCA(
+  responses: TestResponse[],
+  context?: ScoringContext
+): MoCAResult {
+  // Implementation will be added
+  return {
+    totalScore: 0,
+    maxScore: 30,
+    sectionScores: {},
+    educationAdjustment: 0,
+    interpretation: 'normal'
+  } as MoCAResult;
+}
+
+/**
+ * Calculate PHQ-9 score
+ */
+export function scorePHQ9(
+  responses: number[]
+): PHQ9Result {
+  const totalScore = responses.reduce((sum, score) => sum + score, 0);
+  let severity: string;
+  
+  if (totalScore <= 4) severity = 'minimal';
+  else if (totalScore <= 9) severity = 'mild';
+  else if (totalScore <= 14) severity = 'moderate';
+  else if (totalScore <= 19) severity = 'moderate-severe';
+  else severity = 'severe';
+  
+  return {
+    totalScore,
+    maxScore: 27,
+    severity,
+    suicidalIdeation: responses[8] > 0
+  } as PHQ9Result;
+}
+
+/**
+ * Calculate MMSE score
+ */
+export function scoreMMSE(
+  responses: TestResponse[]
+): AssessmentResult {
+  return {
+    testType: 'mmse',
+    totalScore: 0,
+    maxScore: 30,
+    sectionScores: {},
+    interpretation: 'normal',
+    completedAt: new Date(),
+    riskAssessment: {
+      riskCategory: 'low',
+      riskScore: 0,
+      confidenceInterval: { lower: 0, upper: 0 },
+      factors: []
+    }
+  };
+}
+
+/**
+ * Calculate AD8 score
+ */
+export function scoreAD8(
+  responses: number[]
+): { totalScore: number; riskLevel: string } {
+  const totalScore = responses.reduce((sum, score) => sum + score, 0);
+  const riskLevel = totalScore >= 2 ? 'high' : 'low';
+  
+  return { totalScore, riskLevel };
+}
+
+/**
+ * Calculate Parkinson's assessment score
+ */
+export function scoreParkinsons(
+  responses: TestResponse[]
+): { totalScore: number; motorScore: number; nonMotorScore: number } {
+  return {
+    totalScore: 0,
+    motorScore: 0,
+    nonMotorScore: 0
+  };
+}
+
+/**
+ * Validate response based on type and constraints
+ */
+export function validateResponse(
+  response: any,
+  type: string,
+  constraints?: any
+): boolean {
+  if (constraints?.required && (response === null || response === undefined)) {
+    return false;
+  }
+  
+  if (type === 'number' && constraints) {
+    if (typeof response !== 'number') return false;
+    if (constraints.min !== undefined && response < constraints.min) return false;
+    if (constraints.max !== undefined && response > constraints.max) return false;
+  }
+  
+  if (type === 'array' && constraints?.length) {
+    return Array.isArray(response) && response.length === constraints.length;
+  }
+  
+  return true;
+}
+
+/**
+ * Calculate total score from section scores
+ */
+export function calculateTotalScore(
+  sectionScores: Record<string, any>,
+  scoreKey?: string
+): number {
+  return Object.values(sectionScores).reduce((total, section) => {
+    if (scoreKey && typeof section === 'object' && section[scoreKey] !== undefined) {
+      return total + section[scoreKey];
+    }
+    return total + (typeof section === 'number' ? section : 0);
+  }, 0);
+}
+
 export class ScoringEngine {
   /**
    * Calculate the total score for an assessment session

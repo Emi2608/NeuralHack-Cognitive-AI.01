@@ -317,6 +317,13 @@ export class AuditService {
    * Save audit event to database
    */
   private static async saveToDatabase(event: AuditEvent): Promise<void> {
+    // Add unique identifier to prevent duplicates
+    const uniqueMetadata = {
+      ...event.metadata,
+      client_timestamp: event.timestamp?.toISOString(),
+      unique_id: `${event.userId || 'anon'}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+    };
+
     const { error } = await supabase
       .from('audit_logs')
       .insert({
@@ -324,13 +331,17 @@ export class AuditService {
         resource_type: event.resourceType,
         resource_id: event.resourceId,
         user_id: event.userId,
-        metadata: event.metadata,
+        metadata: uniqueMetadata,
         ip_address: event.ipAddress,
-        user_agent: event.userAgent,
-        created_at: event.timestamp?.toISOString()
+        user_agent: event.userAgent
       });
 
     if (error) {
+      // If it's a constraint violation (409), log but don't throw
+      if (error.code === '23505' || error.message.includes('duplicate') || error.message.includes('conflict')) {
+        console.warn('Audit log duplicate entry prevented:', error);
+        return;
+      }
       throw error;
     }
   }

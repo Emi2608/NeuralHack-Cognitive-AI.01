@@ -36,6 +36,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { ArticleCard } from '../../components/education/ArticleCard';
 import { RecommendedArticles } from '../../components/education/RecommendedArticles';
 import { ReadingStats } from '../../components/education/ReadingStats';
+import { ResponsiveContainer } from '../../components/layout';
 import './EducationPage.css';
 
 const EducationPage: React.FC = () => {
@@ -158,7 +159,7 @@ const EducationPage: React.FC = () => {
   }
 
   return (
-    <IonPage>
+    <IonPage className="education-page">
       <IonHeader>
         <IonToolbar>
           <IonTitle>{t('navigation.education')}</IonTitle>
@@ -175,7 +176,7 @@ const EducationPage: React.FC = () => {
           />
         </IonRefresher>
 
-        <div className="education-content">
+        <ResponsiveContainer maxWidth="xl" className="education-content">
           {/* Search Bar */}
           <div className="search-section">
             <IonSearchbar
@@ -250,7 +251,7 @@ const EducationPage: React.FC = () => {
               </IonGrid>
             )}
           </div>
-        </div>
+        </ResponsiveContainer>
       </IonContent>
     </IonPage>
   );

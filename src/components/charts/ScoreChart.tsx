@@ -78,8 +78,8 @@ export const ScoreChart: React.FC<ScoreChartProps> = ({
     datasets.push({
       label: 'Puntuación Máxima',
       data: maxScoreData,
-      backgroundColor: 'rgba(156, 163, 175, 0.3)',
-      borderColor: 'rgba(156, 163, 175, 0.6)',
+      backgroundColor: ['rgba(156, 163, 175, 0.3)'] as any,
+      borderColor: ['rgba(156, 163, 175, 0.6)'] as any,
       borderWidth: 1,
       borderRadius: 4,
       borderSkipped: false,

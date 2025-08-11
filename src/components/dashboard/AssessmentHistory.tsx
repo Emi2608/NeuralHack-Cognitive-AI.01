@@ -330,7 +330,7 @@ export const AssessmentHistory: React.FC<AssessmentHistoryProps> = ({
                         {selectedAssessment.sectionScores.map((section, index) => (
                           <IonItem key={index}>
                             <IonLabel>
-                              <h4>{section.sectionName}</h4>
+                              <h4>{section.name}</h4>
                               <p>{section.score}/{section.maxScore} puntos</p>
                             </IonLabel>
                             <IonBadge slot="end" color="primary">

@@ -78,7 +78,7 @@ export const TrendChart: React.FC<TrendChartProps> = ({
       let filteredHistory = history;
       
       if (selectedTestType !== 'all') {
-        filteredHistory = history.filter(a => a.testType === selectedTestType);
+        filteredHistory = history.filter((a: any) => a.testType === selectedTestType);
       }
       
       setAssessments(filteredHistory);
@@ -157,7 +157,7 @@ export const TrendChart: React.FC<TrendChartProps> = ({
 
     chartInstance.current = new Chart(ctx, {
       type: 'line',
-      data: { datasets },
+      data: { datasets } as any,
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -306,7 +306,7 @@ export const TrendChart: React.FC<TrendChartProps> = ({
             <IonLabel>{t('longitudinal.chart.testType')}:</IonLabel>
             <IonSelect
               value={selectedTestType}
-              onSelectionChange={(e) => setSelectedTestType(e.detail.value)}
+              onIonChange={(e: any) => setSelectedTestType(e.detail.value)}
               interface="popover"
               className="test-type-select"
             >

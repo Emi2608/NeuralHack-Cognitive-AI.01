@@ -18,6 +18,36 @@ ion-app {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* Responsive layout improvements */
+@media (min-width: 768px) {
+  ion-content {
+    --padding-start: 0;
+    --padding-end: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  ion-content {
+    --padding-start: 0;
+    --padding-end: 0;
+  }
+}
+
+/* Ensure proper centering for all content */
+ion-content.ion-padding {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: var(--spacing-md);
+  --padding-bottom: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  ion-content.ion-padding {
+    --padding-top: var(--spacing-lg);
+    --padding-bottom: var(--spacing-lg);
+  }
+}
+
 /* Loading states */
 .loading-container {
   display: flex;

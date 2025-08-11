@@ -15,7 +15,7 @@ import { ScoringEngine } from '../utils/scoring/scoringRules';
 import { RecommendationEngine } from '../utils/scoring/recommendationEngine';
 import type { UserProfile } from '../types/user';
 
-export class AssessmentService implements AssessmentEngine {
+export class AssessmentService {
   /**
    * Create a new assessment session
    */
@@ -341,7 +341,7 @@ export class AssessmentService implements AssessmentEngine {
         : 0;
 
       // Generate recommendations
-      result.recommendations = RecommendationEngine.generateRecommendations(result, userProfile);
+      result.recommendations = RecommendationEngine.generatePersonalizedRecommendations(result, userProfile);
 
       // Save the result to the session
       await this.updateSession(sessionId, { result });
@@ -357,7 +357,7 @@ export class AssessmentService implements AssessmentEngine {
    * Generate recommendations based on assessment result
    */
   static async generateRecommendations(result: AssessmentResult, userProfile: any): Promise<any[]> {
-    return RecommendationEngine.generateRecommendations(result, userProfile);
+    return RecommendationEngine.generatePersonalizedRecommendations(result, userProfile);
   }
 
   /**
@@ -578,5 +578,27 @@ export class AssessmentService implements AssessmentEngine {
 
     const totalTime = responses.reduce((sum, response) => sum + response.responseTime, 0);
     return totalTime / responses.length;
+  }
+
+  /**
+   * Get assessment history for a user
+   */
+  static async getAssessmentHistory(userId: string): Promise<AssessmentResult[]> {
+    try {
+      const { data, error } = await supabase
+        .from('assessment_results')
+        .select('*')
+        .eq('user_id', userId)
+        .order('completed_at', { ascending: false });
+
+      if (error) {
+        throw error;
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Error fetching assessment history:', error);
+      throw error;
+    }
   }
 }

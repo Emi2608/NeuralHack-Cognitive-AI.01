@@ -19,7 +19,7 @@ import {
   checkmark,
   time,
   eye,
-  finger
+  handLeft
 } from 'ionicons/icons';
 import { useTranslation } from 'react-i18next';
 import { Question } from '../../types/assessment';

@@ -1,0 +1,71 @@
+/* Profile Page Styles */
+
+/* Responsive content container */
+.profile-page .responsive-content {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Tablet and desktop styles */
+@media (min-width: 768px) {
+  .profile-page .responsive-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .profile-page .responsive-content {
+    max-width: 900px;
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1200px) {
+  .profile-page .responsive-content {
+    max-width: 800px;
+    padding: 0 var(--spacing-xl);
+  }
+}
+
+/* Card improvements for larger screens */
+@media (min-width: 768px) {
+  .profile-page ion-card {
+    margin: var(--spacing-lg) 0;
+  }
+}
+
+/* Ensure proper spacing on all screen sizes */
+.profile-page ion-content {
+  --padding-top: var(--spacing-md);
+  --padding-bottom: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .profile-page ion-content {
+    --padding-top: var(--spacing-lg);
+    --padding-bottom: var(--spacing-lg);
+  }
+}
+
+/* List item improvements */
+.profile-page ion-item {
+  --padding-start: var(--spacing-md);
+  --padding-end: var(--spacing-md);
+}
+
+/* Alert button styling */
+.alert-button-danger {
+  color: var(--ion-color-danger) !important;
+}
+
+/* Modal improvements */
+.profile-page ion-modal ion-content {
+  --background: var(--ion-background-color);
+}
+
+.profile-page ion-modal ion-toolbar {
+  --background: var(--ion-color-primary);
+  --color: white;
+}

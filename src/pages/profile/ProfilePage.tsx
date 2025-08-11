@@ -32,6 +32,8 @@ import { useHistory } from 'react-router-dom';
 import { ProfileSettingsForm } from '../../components/forms/ProfileSettingsForm';
 import { useAuth } from '../../hooks/useAuth';
 import { ROUTES } from '../../constants/routes';
+import { ResponsiveContainer } from '../../components/layout';
+import './ProfilePage.css';
 
 export const ProfilePage: React.FC = () => {
   const { t } = useTranslation();
@@ -87,7 +89,7 @@ export const ProfilePage: React.FC = () => {
   }
 
   return (
-    <IonPage>
+    <IonPage className="profile-page">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
@@ -98,6 +100,7 @@ export const ProfilePage: React.FC = () => {
       </IonHeader>
       
       <IonContent className="ion-padding">
+        <ResponsiveContainer maxWidth="md">
         {/* User Information Card */}
         <IonCard>
           <IonCardHeader>
@@ -261,6 +264,7 @@ export const ProfilePage: React.FC = () => {
             },
           ]}
         />
+        </ResponsiveContainer>
       </IonContent>
     </IonPage>
   );

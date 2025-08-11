@@ -21,15 +21,22 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './App.css';
+import './styles/globals.css';
 
 // Pages
 import { LoginPage } from './pages/auth/LoginPage';
 import { ConsentPage } from './pages/auth/ConsentPage';
+import EmailConfirmationPage from './pages/auth/EmailConfirmationPage';
+import { DashboardPage } from './pages/dashboard/DashboardPage';
+
+// Debug components
+import { AuthDebugger } from './components/debug/AuthDebugger';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
+    <AuthDebugger enabled={import.meta.env.DEV} />
     <IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/login">
@@ -37,6 +44,12 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/consent">
           <ConsentPage />
+        </Route>
+        <Route exact path="/auth/confirm">
+          <EmailConfirmationPage />
+        </Route>
+        <Route exact path="/dashboard">
+          <DashboardPage />
         </Route>
         <Route exact path="/">
           <Redirect to="/login" />

@@ -48,6 +48,30 @@ export interface Point {
   timestamp: number;
 }
 
+export interface Recommendation {
+  id: string;
+  testType: TestType;
+  riskLevel: RiskCategory;
+  type: 'medical' | 'lifestyle' | 'monitoring';
+  category: 'immediate' | 'short_term' | 'long_term';
+  title: string;
+  description: string;
+  priority: 'urgent' | 'high' | 'medium' | 'low';
+  actionSteps: string[];
+  resources?: RecommendationResource[];
+  followUpDays: number;
+  metadata?: Record<string, any>;
+}
+
+export interface RecommendationResource {
+  type: 'article' | 'video' | 'app' | 'contact' | 'organization' | 'program';
+  title: string;
+  description?: string;
+  url?: string;
+  phone?: string;
+  email?: string;
+}
+
 export interface Question {
   id: string;
   type: QuestionType;
@@ -221,26 +245,7 @@ export interface RiskFactor {
   description: string;
 }
 
-export interface Recommendation {
-  id: string;
-  testType: TestType;
-  type?: 'lifestyle' | 'medical' | 'monitoring' | 'educational';
-  category: 'lifestyle' | 'medical' | 'monitoring' | 'educational' | 'immediate' | 'short_term' | 'long_term';
-  riskLevel: RiskCategory;
-  title: string;
-  description: string;
-  priority: 'low' | 'medium' | 'high' | 'emergency' | 'urgent';
-  actionSteps?: string[];
-  resources?: RecommendationResource[];
-  followUpDays?: number;
-}
 
-export interface RecommendationResource {
-  type: 'article' | 'video' | 'contact' | 'app' | 'website' | 'guide' | 'organization' | 'program';
-  title: string;
-  url?: string;
-  description?: string;
-}
 
 export interface AssessmentSession {
   id: string;

@@ -653,6 +653,56 @@ class MonitoringService {
 
     console.log('🔍 Monitoring service cleaned up');
   }
+
+  /**
+   * Log error for monitoring
+   */
+  logError(context: string, error: Error, metadata?: Record<string, any>): void {
+    console.error(`[${context}] Error:`, error.message, metadata);
+    
+    // In a real implementation, you would send this to your monitoring service
+    // For now, we'll just log it to console
+    const errorData = {
+      context,
+      message: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString(),
+      metadata
+    };
+    
+    // Store error for potential reporting
+    if (typeof window !== 'undefined') {
+      const errors = JSON.parse(localStorage.getItem('app_errors') || '[]');
+      errors.push(errorData);
+      // Keep only last 50 errors
+      if (errors.length > 50) {
+        errors.splice(0, errors.length - 50);
+      }
+      localStorage.setItem('app_errors', JSON.stringify(errors));
+    }
+  }
+
+  /**
+   * Log performance metrics
+   */
+  logPerformanceMetrics(metrics: any): void {
+    console.log('Performance metrics:', metrics);
+    
+    // In a real implementation, you would send this to your monitoring service
+    // For now, we'll just log it to console
+    if (typeof window !== 'undefined') {
+      const performanceData = JSON.parse(localStorage.getItem('performance_metrics') || '[]');
+      performanceData.push({
+        ...metrics,
+        timestamp: new Date().toISOString()
+      });
+      // Keep only last 100 metrics
+      if (performanceData.length > 100) {
+        performanceData.splice(0, performanceData.length - 100);
+      }
+      localStorage.setItem('performance_metrics', JSON.stringify(performanceData));
+    }
+  }
 }
 
 export const monitoringService = new MonitoringService();

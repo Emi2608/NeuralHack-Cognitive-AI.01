@@ -311,7 +311,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ userId }) =>
                       <IonLabel>{t('longitudinal.reminders.frequency.label')}:</IonLabel>
                       <IonSelect
                         value={setting.frequency}
-                        onSelectionChange={(e) => handleFrequencyChange(setting.testType, e.detail.value)}
+                        onIonChange={(e: any) => handleFrequencyChange(setting.testType, e.detail.value)}
                         interface="popover"
                         className="frequency-select"
                       >
@@ -334,7 +334,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ userId }) =>
                       <IonLabel>{t('longitudinal.reminders.customMessage')}:</IonLabel>
                       <IonTextarea
                         value={setting.customMessage || ''}
-                        onIonBlur={(e) => handleCustomMessageChange(setting.testType, e.detail.value!)}
+                        onIonBlur={(e: any) => handleCustomMessageChange(setting.testType, e.detail?.value || '')}
                         placeholder={t('longitudinal.reminders.customMessagePlaceholder')}
                         rows={2}
                         className="message-textarea"

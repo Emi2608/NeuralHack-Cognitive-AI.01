@@ -61,7 +61,9 @@ export const MMSEAssessment: React.FC<MMSEAssessmentProps> = ({
 
   const handleNext = () => {
     if (currentResponse !== null) {
-      submitResponse(currentQuestion.id, currentResponse);
+      if (currentQuestion) {
+        submitResponse(currentQuestion.id, currentResponse);
+      }
       setCurrentResponse(null);
     }
     nextQuestion();
@@ -81,7 +83,7 @@ export const MMSEAssessment: React.FC<MMSEAssessmentProps> = ({
   const getSectionProgress = () => {
     const sectionQuestions = mmseDefinition.sections
       .find(s => s.id === currentSection?.id)?.questions || [];
-    const currentQuestionIndex = sectionQuestions.findIndex(q => q.id === currentQuestion.id);
+    const currentQuestionIndex = currentQuestion ? sectionQuestions.findIndex(q => q.id === currentQuestion.id) : -1;
     return {
       current: currentQuestionIndex + 1,
       total: sectionQuestions.length
@@ -127,7 +129,7 @@ export const MMSEAssessment: React.FC<MMSEAssessmentProps> = ({
               {formatTime(timeRemaining)}
             </div>
           </div>
-          <IonProgressBar value={progress} />
+          <IonProgressBar value={typeof progress === 'number' ? progress : 0} />
         </div>
 
         {/* Current section info */}
@@ -150,9 +152,9 @@ export const MMSEAssessment: React.FC<MMSEAssessmentProps> = ({
         {/* Question */}
         <AssessmentContainer>
           <QuestionRenderer
-            question={currentQuestion}
-            onResponseChange={handleResponseChange}
-            currentResponse={currentResponse}
+            question={currentQuestion!}
+            onChange={handleResponseChange}
+            value={currentResponse}
           />
         </AssessmentContainer>
 
@@ -179,7 +181,7 @@ export const MMSEAssessment: React.FC<MMSEAssessmentProps> = ({
             onClick={handleNext}
             disabled={!canGoNext && currentResponse === null}
           >
-            {progress === 1 ? 'Finalizar' : 'Siguiente'}
+            {progress && typeof progress === 'number' && progress >= 1 ? 'Finalizar' : 'Siguiente'}
           </IonButton>
         </div>
 
