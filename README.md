@@ -55,7 +55,7 @@ PWA with basic tests, hosted on GitHub Pages + Supabase backend.
 Problem: Late diagnosis. Solution: AI screening app. Metrics: Tests completed, referral rate. Unique Value: Accessible/offline. Channels: App stores, social media. Revenues: Subscriptions. Costs: Development. Partners: Universities. Segments: 40-60 years, clinics.
 
 ## Features
-- **Registration/Sign-in**: Auth with email/OAuth via Supabase, ethical consent.
+- **Registration/Sign-in**: Auth with name and phone number via Supabase, ethical consent.
 - **Cognitive Tests**: MoCA, PHQ-9, MMSE, AD8, Parkinson's Questionnaire – interactive, in Spanish, with timers/drawing/voice.
 - **Scoring and Prediction**: Rule-based for risk (low/moderate/high), adjusted by demographics (age/education).
 - **Dashboard/UI**: Charts (bars, lines, pies) with insights, longitudinal trends, progression alerts.
